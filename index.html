@@ -14,7 +14,7 @@
             theme: {
                 extend: {
                     colors: {
-                        primary: '#3B82F6', // Blue-600
+                        primary: '#0D9488', // Teal-600
                         secondary: '#F3F4F6', // Gray-100
                         'cta-orange': '#F97316', // Orange-500
                         'text-dark': '#1F2937', // Gray-800
@@ -49,6 +49,7 @@
         @layer base {
             html {
                 scroll-behavior: smooth;
+                scroll-padding-top: 5rem; /* Added for sticky header offset */
             }
             body {
                 @apply font-sans text-text-default antialiased;
@@ -57,17 +58,15 @@
             h1, h2, h3 {
                 @apply font-semibold text-text-dark leading-tight tracking-tight;
             }
-            h1 { @apply text-4xl md:text-5xl lg:text-6xl; }
+            h1 { @apply text-3xl md:text-4xl lg:text-5xl; }
             h2 { @apply text-3xl md:text-4xl; }
             h3 { @apply text-2xl md:text-3xl; }
-            /* Custom list style for checkmarks */
             .list-check li {
-                @apply flex items-start mb-3; /* Use items-start for longer text alignment */
+                @apply flex items-start mb-3;
             }
             .list-check li svg {
-                @apply w-6 h-6 text-accent-green mr-3 mt-1 flex-shrink-0; /* Adjust margin-top */
+                @apply w-6 h-6 text-accent-green mr-3 mt-1 flex-shrink-0;
             }
-            /* Ensure links in content are styled */
             section a:not(.btn-cta):not(.tel-link) {
                 @apply text-primary hover:underline;
             }
@@ -82,9 +81,8 @@
             .container-section {
                  @apply container mx-auto px-4 md:px-6 lg:px-8;
             }
-            /* Staff Card Style */
             .staff-card {
-                @apply bg-white border border-gray-200 rounded-lg p-6 text-center shadow-sm hover:shadow-md transition-shadow duration-300;
+                @apply bg-white border border-gray-200 rounded-lg p-6 text-center shadow-sm hover:shadow-md transition-shadow duration-300 flex flex-col;
             }
             .staff-card img {
                 @apply w-24 h-24 rounded-full mx-auto mb-4 object-cover;
@@ -92,15 +90,17 @@
             .staff-card .name {
                 @apply text-lg font-semibold text-text-dark mb-1;
             }
+            .staff-card .name .roman {
+                @apply block text-xs text-gray-500 font-normal;
+            }
             .staff-card .qualification {
                 @apply text-sm text-primary font-medium mb-2;
             }
             .staff-card .specialty {
-                @apply text-sm text-gray-600;
+                @apply text-sm text-gray-600 flex-grow;
             }
-            /* Google Review Style */
             .google-review-box {
-                @apply bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-200 rounded-lg p-8 flex flex-col md:flex-row items-center justify-center gap-8 mt-12 md:mt-16;
+                @apply bg-gradient-to-r from-teal-50 to-cyan-50 border border-teal-200 rounded-lg p-8 flex flex-col md:flex-row items-center justify-center gap-8 mt-12 md:mt-16;
             }
             .google-review-box .rating {
                 @apply flex items-center gap-2 text-center md:text-left;
@@ -114,26 +114,24 @@
              .google-review-box .image-placeholder {
                  @apply w-full md:w-1/3 h-48 bg-gray-300 rounded-md flex items-center justify-center text-gray-500 text-sm;
              }
-             /* Testimonial Card Style */
             .testimonial-card {
-                @apply bg-white border border-gray-200 rounded-lg p-6 shadow-sm space-y-4;
+                @apply bg-white border border-gray-200 rounded-lg p-6 shadow-sm space-y-4 flex flex-col;
             }
             .testimonial-card .quote {
-                @apply text-text-default italic relative pl-8;
+                 @apply text-text-default italic relative pl-8 flex-grow;
             }
             .testimonial-card .quote::before {
                 content: '“';
                 @apply absolute left-0 top-0 text-4xl text-primary opacity-50 font-serif;
             }
              .testimonial-card .author {
-                 @apply font-semibold text-text-dark mt-2;
+                 @apply font-semibold text-text-dark mt-4 text-right;
              }
-             /* Session Flow Step Style */
              .step-item {
                  @apply relative pl-12 pb-8 border-l border-dashed border-primary/50;
              }
               .step-item:last-child {
-                 @apply border-l-transparent pb-0; /* Remove line for last item */
+                 @apply border-l-transparent pb-0;
              }
              .step-item .icon-wrapper {
                  @apply absolute -left-5 top-0 w-10 h-10 bg-primary rounded-full flex items-center justify-center text-white font-bold text-lg;
@@ -141,7 +139,6 @@
              .step-item h4 {
                  @apply text-xl font-semibold text-text-dark mb-2;
              }
-              /* FAQ Item Style */
              .faq-item {
                  @apply border-b border-gray-200 py-5;
              }
@@ -154,7 +151,7 @@
              .faq-answer {
                  @apply mt-3 text-text-default;
              }
-             .faq-answer p + p { /* Add space between paragraphs in answer */
+             .faq-answer p + p {
                  @apply mt-2;
              }
         }
@@ -165,14 +162,57 @@
 </head>
 <body class="bg-white">
 
+    <!-- Sticky Header -->
+    <header x-data="{ open: false }" class="sticky top-0 z-50 bg-white shadow-md">
+        <div class="container-section flex justify-between items-center py-3">
+            <!-- Logo/Brand Name replaced with image -->
+            <a href="#hero">
+                <img src="images/logo.png" alt="BACK AGING ロゴ" class="h-8 w-auto">
+            </a>
+
+            <!-- Desktop Navigation -->
+            <nav class="hidden md:flex space-x-6">
+                <a href="#introduction" class="text-sm font-medium text-gray-700 hover:text-primary">私たちについて</a>
+                <a href="#knee-pain" class="text-sm font-medium text-gray-700 hover:text-primary">膝痛の原因</a>
+                <a href="#approach" class="text-sm font-medium text-gray-700 hover:text-primary">連動性療法とは</a>
+                <a href="#testimonials" class="text-sm font-medium text-gray-700 hover:text-primary">お客様の声</a>
+                <a href="#flow" class="text-sm font-medium text-gray-700 hover:text-primary">施術の流れ</a>
+                <a href="#offer" class="text-sm font-medium text-gray-700 hover:text-primary">ご予約</a>
+                <a href="#faq" class="text-sm font-medium text-gray-700 hover:text-primary">FAQ</a>
+            </nav>
+
+            <!-- Mobile Menu Button -->
+            <div class="md:hidden">
+                <button @click="open = !open" class="text-gray-700 hover:text-primary focus:outline-none">
+                    <i x-show="!open" data-lucide="menu" class="w-6 h-6"></i>
+                    <i x-show="open" data-lucide="x" class="w-6 h-6"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Navigation Menu -->
+        <nav x-show="open" x-transition class="md:hidden bg-white pb-4 border-t border-gray-200">
+            <a href="#introduction" @click="open = false" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-primary">私たちについて</a>
+            <a href="#knee-pain" @click="open = false" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-primary">膝痛の原因</a>
+            <a href="#approach" @click="open = false" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-primary">連動性療法とは</a>
+            <a href="#testimonials" @click="open = false" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-primary">お客様の声</a>
+            <a href="#flow" @click="open = false" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-primary">施術の流れ</a>
+            <a href="#offer" @click="open = false" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-primary">ご予約</a>
+            <a href="#faq" @click="open = false" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-primary">FAQ</a>
+        </nav>
+    </header>
+
     <!-- Section 1: First View (Hero) -->
-    <section id="hero" class="bg-gradient-to-b from-blue-50 via-white to-white min-h-[85vh] flex items-center py-16 md:py-20 lg:py-24">
+    <section id="hero" class="bg-gradient-to-b from-teal-50 via-white to-white min-h-[85vh] flex items-center py-16 md:py-20 lg:py-24">
         <div class="container-section">
             <div class="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-16 items-center">
                 <!-- Left: Text Content -->
                 <div class="text-center md:text-left order-2 md:order-1">
-                    <h1 class="font-bold mb-6 text-balance">
-                        膝が痛い。階段がつらい。<br class="hidden lg:inline"> その膝痛、<span class="text-primary">手術せずに根本から</span>改善できます。
+                    <h1 class="font-bold mb-6 text-balance !leading-snug md:!leading-snug lg:!leading-snug">
+                        膝が痛い。<br>
+                        階段がつらい。<br>
+                        その膝痛、手術せずに<br>
+                        <span class="text-primary">根本から改善できます。</span>
                     </h1>
                     <p class="text-lg md:text-xl text-text-default mb-8 max-w-xl mx-auto md:mx-0">
                         マッサージや薬では、なかなか良くならなかった膝の痛みが、BACK AGINGの『連動性療法』で変えられるかもしれません。 もし、真剣に根本解決を考えていて、これからの人生でも本当にやりたいことを諦めずに楽しめる毎日を取り戻したいと思うなら、ぜひご一読の上、ご判断ください。
@@ -187,15 +227,15 @@
                             <span>070-9298-1284</span>
                         </a>
                     </div>
-                     <p class="text-sm text-gray-600 mt-4 text-center md:text-left">お気軽にお問い合わせください（受付時間：平日9:30-21:00 / 土日祝8:00-19:30）</p>
+                      <p class="text-sm text-gray-600 mt-4 text-center md:text-left">
+                          お気軽にお問い合わせください<br class="sm:hidden">
+                          （受付時間：平日9:30-21:00 / 土日祝8:00-19:30）
+                      </p>
                 </div>
 
-                <!-- Right: Image Placeholder (Before/After) -->
-                <div class="relative order-1 md:order-2 h-80 md:h-96 lg:h-[32rem] bg-gray-200 rounded-xl shadow-lg overflow-hidden flex flex-col items-center justify-center text-center text-gray-500 p-4">
-                    <i data-lucide="image" class="w-16 h-16 mb-4"></i>
-                    <span class="text-xl font-medium">Before / After</span>
-                    <span class="text-sm mt-1">（膝を痛そうにする女性 → 笑顔で階段を上る女性）</span>
-                    <!-- <img src="/path/to/your-before-after-image.webp" alt="膝痛改善 前後の様子" class="absolute inset-0 w-full h-full object-cover" loading="lazy"> -->
+                <!-- Right: Image Replaced -->
+                <div class="relative order-1 md:order-2 h-80 md:h-96 lg:h-[32rem] rounded-xl shadow-lg overflow-hidden bg-gray-100">
+                    <img src="images/fv.png" alt="膝痛改善 前後の比較写真" class="w-full h-full object-contain" loading="lazy">
                 </div>
             </div>
         </div>
@@ -212,15 +252,11 @@
                     もし膝が全く痛くなくなったら、あなたは何を始めますか？
                 </p>
             </div>
-
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12 items-center">
-                <!-- Image Placeholder -->
-                <div class="relative h-64 md:h-80 bg-gray-300 rounded-xl shadow-md overflow-hidden flex items-center justify-center text-gray-500">
-                    <i data-lucide="image" class="w-12 h-12"></i>
-                    <span class="ml-2">笑顔で趣味を楽しむイメージ画像</span>
-                    <!-- <img src="/path/to/future-image.webp" alt="旅行や趣味を楽しむ人々" class="absolute inset-0 w-full h-full object-cover" loading="lazy"> -->
+                <!-- Image Replaced & Resized -->
+                <div class="relative h-72 md:h-96 aspect-square rounded-xl shadow-md overflow-hidden bg-gray-100 mx-auto">
+                    <img src="images/future.png" alt="膝の痛みがなくなり、笑顔で趣味を楽しむ様子" class="w-full h-full object-cover" loading="lazy">
                 </div>
-
                 <!-- Benefit List -->
                 <div>
                     <ul class="list-check text-lg mb-8">
@@ -254,60 +290,56 @@
                     BACK AGING鎌倉由比ヶ浜店は、鍼灸師・理学療法士など、全トレーナーが医療系国家資格を保有しています。一時的な痛み緩和や対症療法にとどまらず、身体本来の動きを取り戻す「連動性療法」で、あなたのお悩みに真摯に向き合います。
                 </p>
             </div>
-
             <!-- Staff Grid -->
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mb-12 md:mb-16">
-                <!-- Staff Card 1 (Placeholder) -->
+                <!-- 和田 有稀奈 -->
                 <div class="staff-card">
-                    <div class="w-24 h-24 rounded-full mx-auto mb-4 bg-gray-300 flex items-center justify-center text-gray-500"><i data-lucide="user"></i></div>
-                    <h3 class="name">スタッフ名 1</h3>
-                    <p class="qualification">理学療法士</p>
-                    <p class="specialty">得意分野：慢性腰痛、スポーツ障害</p>
+                    <img src="images/wada.webp" alt="和田 有稀奈 トレーナー" class="w-24 h-24 rounded-full mx-auto mb-4 object-cover" loading="lazy">
+                    <h3 class="name">和田 有稀奈<span class="roman">Yukina Wada</span></h3>
+                    <p class="qualification">連動性トレーナー・鍼灸師</p>
+                    <p class="specialty">得意分野：膝の悩み、痛みの根本改善、スポーツ復帰支援</p>
                 </div>
-                 <!-- Staff Card 2 (Placeholder) -->
+                 <!-- 浜木 遼太 -->
                 <div class="staff-card">
-                    <div class="w-24 h-24 rounded-full mx-auto mb-4 bg-gray-300 flex items-center justify-center text-gray-500"><i data-lucide="user"></i></div>
-                    <h3 class="name">スタッフ名 2</h3>
-                    <p class="qualification">鍼灸師</p>
-                    <p class="specialty">得意分野：肩こり、自律神経調整</p>
+                    <img src="images/hamaki.webp" alt="浜木 遼太 トレーナー" class="w-24 h-24 rounded-full mx-auto mb-4 object-cover" loading="lazy">
+                    <h3 class="name">浜木 遼太<span class="roman">Ryota Hamaki</span></h3>
+                    <p class="qualification">連動性トレーナー・鍼灸師</p>
+                    <p class="specialty">得意分野：腰痛・肩こり、痛みの根本改善、ランナーサポート</p>
                 </div>
-                 <!-- Staff Card 3 (Placeholder) -->
+                 <!-- 山田 紘暉 -->
                 <div class="staff-card">
-                    <div class="w-24 h-24 rounded-full mx-auto mb-4 bg-gray-300 flex items-center justify-center text-gray-500"><i data-lucide="user"></i></div>
-                    <h3 class="name">スタッフ名 3</h3>
-                    <p class="qualification">理学療法士</p>
-                    <p class="specialty">得意分野：膝関節疾患、術後リハビリ</p>
+                    <img src="images/yamada.webp" alt="山田 紘暉 トレーナー" class="w-24 h-24 rounded-full mx-auto mb-4 object-cover" loading="lazy">
+                    <h3 class="name">山田 紘暉<span class="roman">Hiroki Yamada</span></h3>
+                    <p class="qualification">連動性トレーナー・理学療法士</p>
+                    <p class="specialty">得意分野：スポーツ障害（特にランニング）、動作分析・改善、怪我からの復帰</p>
                 </div>
-                 <!-- Staff Card 4 (Placeholder) -->
+                 <!-- 高村 武光 -->
                  <div class="staff-card">
-                    <div class="w-24 h-24 rounded-full mx-auto mb-4 bg-gray-300 flex items-center justify-center text-gray-500"><i data-lucide="user"></i></div>
-                    <h3 class="name">スタッフ名 4</h3>
-                    <p class="qualification">鍼灸師</p>
-                    <p class="specialty">得意分野：パフォーマンスアップ</p>
+                    <img src="images/takamura.webp" alt="高村 武光 トレーナー" class="w-24 h-24 rounded-full mx-auto mb-4 object-cover" loading="lazy">
+                    <h3 class="name">高村 武光<span class="roman">Takemitsu Takamura</span></h3>
+                    <p class="qualification">連動性トレーナー・鍼灸師</p>
+                    <p class="specialty">得意分野：変形性関節症（股関節・膝）、高齢者リハビリ、オンライン対応</p>
                 </div>
-                 <!-- Staff Card 5 (Placeholder) -->
+                 <!-- 紙谷 友希 -->
                  <div class="staff-card">
-                    <div class="w-24 h-24 rounded-full mx-auto mb-4 bg-gray-300 flex items-center justify-center text-gray-500"><i data-lucide="user"></i></div>
-                    <h3 class="name">スタッフ名 5</h3>
-                    <p class="qualification">理学療法士</p>
-                    <p class="specialty">得意分野：姿勢改善、産後ケア</p>
+                    <img src="images/kamitani.webp" alt="紙谷 友希 トレーナー" class="w-24 h-24 rounded-full mx-auto mb-4 object-cover" loading="lazy">
+                    <h3 class="name">紙谷 友希<span class="roman">Tomoki Kamitani</span></h3>
+                    <p class="qualification">連動性トレーナー・理学療法士</p>
+                    <p class="specialty">得意分野：重度疾患のリハビリ（膝・腰・神経系など）、高齢者ケア、難治性の痛み</p>
                 </div>
-                 <!-- Add more staff cards as needed -->
             </div>
-
             <!-- Google Review Highlight -->
-            <div class="google-review-box">
-                <!-- Review Text & Rating -->
+             <div class="google-review-box">
                  <div class="text-center md:text-left">
                     <p class="text-lg font-semibold text-text-dark mb-2">Googleマップで高評価をいただいています！</p>
                     <div class="rating mb-4">
                         <span class="score">4.9</span>
                         <div class="stars ml-2">
-                            <i data-lucide="star" class="w-6 h-6 fill-current"></i>
-                            <i data-lucide="star" class="w-6 h-6 fill-current"></i>
-                            <i data-lucide="star" class="w-6 h-6 fill-current"></i>
-                            <i data-lucide="star" class="w-6 h-6 fill-current"></i>
-                            <i data-lucide="star-half" class="w-6 h-6 fill-current"></i> <!-- Assuming 4.9 -->
+                            <i data-lucide="star" class="w-6 h-6 fill-current text-star-yellow"></i>
+                            <i data-lucide="star" class="w-6 h-6 fill-current text-star-yellow"></i>
+                            <i data-lucide="star" class="w-6 h-6 fill-current text-star-yellow"></i>
+                            <i data-lucide="star" class="w-6 h-6 fill-current text-star-yellow"></i>
+                            <i data-lucide="star-half" class="w-6 h-6 fill-current text-star-yellow"></i>
                         </div>
                     </div>
                     <p class="text-text-default">
@@ -315,11 +347,8 @@
                         多くの方に選ばれ続けている信頼の証です。
                     </p>
                 </div>
-                <!-- Screenshot Placeholder -->
-                <div class="image-placeholder order-first md:order-last">
-                     <i data-lucide="image" class="w-10 h-10 mr-2"></i> 口コミ画面<br>スクリーンショット
-                     <!-- <img src="/path/to/google-review-screenshot.webp" alt="Googleレビュー評価画面" class="w-full h-full object-contain rounded-md" loading="lazy"> -->
-                </div>
+                <!-- Placeholder replaced with image -->
+                <img src="images/kuchikomi.png" alt="BACK AGING Google 口コミ画面" class="w-full md:w-1/3 h-48 object-contain rounded-md shadow-sm order-first md:order-last" loading="lazy">
             </div>
         </div>
     </section>
@@ -327,30 +356,28 @@
     <!-- Section 4: Knee Pain Explanation -->
     <section id="knee-pain" class="py-16 md:py-20 lg:py-24 bg-secondary">
         <div class="container-section">
+            <h2 class="text-center mb-12 md:mb-16">
+                膝痛は「膝そのもの」だけが原因ではありません。
+            </h2>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12 items-center">
+                <!-- Text Column -->
                 <div>
-                    <h2 class="mb-6">膝痛は「膝そのもの」だけが<br>原因ではありません。</h2>
                     <p class="mb-6">
                         マッサージや湿布、ヒアルロン酸注射などで一時的に楽になっても、痛みがぶり返してしまう…。それは、<strong class="text-primary">痛みの根本原因が膝以外にある</strong>可能性が高いからです。
                     </p>
                     <p class="mb-6">
                         例えば、足首や股関節の動きが悪かったり、体幹が不安定だったりすると、歩行や階段昇降の際に膝に過剰な負担がかかり続けます。その結果、膝の軟骨がすり減ったり、炎症が起きたりするのです（変形性膝関節症など）。
                     </p>
-                     <p>
-                         この動画とイラストで、なぜ膝だけの治療では不十分なのか、分かりやすく解説しています。
+                    <p class="mb-6">
+                        こちらの図は、正常な膝関節と変形性膝関節症の状態を比較したものです。変形性膝関節症では、関節の隙間（関節裂隙：かんせつれつげき）が狭くなり、衝撃を吸収するクッションの役割を持つ軟骨がすり減って（摩耗して）いるのが見て取れます。先ほど述べたように、このような膝の変化は、多くの場合、足首や股関節、体幹などの問題によって膝へ過剰な負荷がかかり続けた結果として現れます。
+                    </p>
+                    <p class="mb-6">
+                        したがって、痛みの根本的な改善を目指すには、膝に見られる変化だけに対処するのではなく、<strong class="text-primary">身体全体の連動性を見直し、膝に負担がかかる根本的な原因を取り除くアプローチ</strong>が不可欠となります。
                     </p>
                 </div>
-                <div class="space-y-6">
-                     <!-- Video Placeholder -->
-                    <div class="aspect-w-16 aspect-h-9 bg-gray-300 rounded-lg shadow-md flex items-center justify-center text-gray-500">
-                        <i data-lucide="video" class="w-12 h-12 mr-2"></i> 解説動画プレースホルダー
-                        <!-- <iframe src="https://www.youtube.com/embed/your_video_id" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen class="w-full h-full rounded-lg"></iframe> -->
-                    </div>
-                     <!-- Illustration Placeholder -->
-                    <div class="h-48 bg-gray-300 rounded-lg shadow-md flex items-center justify-center text-gray-500">
-                         <i data-lucide="image" class="w-12 h-12 mr-2"></i> 変形性膝関節症 イラスト
-                         <!-- <img src="/path/to/knee-illustration.webp" alt="膝痛の原因解説イラスト" class="w-full h-full object-contain rounded-lg" loading="lazy"> -->
-                    </div>
+                <!-- Image Column: Wrapped img in div and increased size -->
+                <div>
+                     <img src="images/knee-pain.png" alt="正常な膝と変形性膝関節症の比較イラスト" class="h-80 md:h-96 lg:h-[30rem] w-full object-contain rounded-lg shadow-md" loading="lazy">
                 </div>
             </div>
         </div>
@@ -367,11 +394,10 @@
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-16 items-center mb-12 md:mb-16">
-                <!-- Image/Video Placeholder -->
-                <div class="relative h-80 md:h-96 bg-gray-200 rounded-xl shadow-lg overflow-hidden flex items-center justify-center text-gray-500 order-1 md:order-2">
-                    <i data-lucide="image" class="w-16 h-16"></i>
-                    <span class="ml-2">施術風景の写真/動画</span>
-                    <!-- <img src="/path/to/session-image.webp" alt="連動性療法の施術風景" class="absolute inset-0 w-full h-full object-cover" loading="lazy"> -->
+                <!-- Image/Video Placeholder replaced with two stacked images -->
+                <div class="order-1 md:order-2 flex flex-col gap-4 md:gap-6">
+                    <img src="images/sejutsu01.png" alt="施術風景 1" class="w-full h-40 md:h-48 object-cover rounded-xl shadow-lg" loading="lazy">
+                    <img src="images/sejutsu02.png" alt="施術風景 2" class="w-full h-40 md:h-48 object-cover rounded-xl shadow-lg" loading="lazy">
                 </div>
                 <!-- Explanation & Reasons -->
                 <div class="order-2 md:order-1">
@@ -394,7 +420,7 @@
             </div>
 
              <!-- Founder's Message -->
-             <div class="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-lg p-8 md:p-12 text-center">
+              <div class="bg-gradient-to-r from-teal-50 to-cyan-50 rounded-lg p-8 md:p-12 text-center">
                  <h3 class="mb-4">創業の想い</h3>
                  <p class="max-w-3xl mx-auto text-lg">
                      BACK AGINGの理念は、「人生100年時代を心身ともにイキイキと過ごせる人を増やす」こと。 高齢になっても自分の足で自由に動き、やりたいことを諦めない人生を実現するために生まれました。 痛みや不安で縮こまっていた心まで元気になる体験を、一人でも多くの方にお届けしたいと思っています。
@@ -408,56 +434,43 @@
         <div class="container-section">
             <h2 class="text-center mb-12 md:mb-16">BACK AGINGをご利用いただいたお客様の声</h2>
              <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                 <!-- Testimonial 1 (のぶ) -->
                  <div class="testimonial-card">
                      <p class="quote">ランニング中に膝の痛みがあり、和田さんのインスタを見て無料相談を申し込みました。膝の痛みの相談でしたが、足首の硬さが原因と指摘され、驚きました。セッションごとに体の動きが改善され、マラソン大会でも不安なく挑め、自己ベストを更新できました。</p>
                      <p class="author">- のぶ様 (ランニング愛好家)</p>
                  </div>
-                  <!-- Testimonial 2 (Akiko) -->
                   <div class="testimonial-card">
                      <p class="quote">フルマラソンで膝の痛みに悩んでいましたが、セッションを受けて1年、上半身と下半身の連動性が向上し、痛みが出にくくなりました。今年のフルマラソン後も、膝の回復がこれまでで一番早かったです。</p>
                      <p class="author">- Akiko (Aki) 様 (マラソンランナー)</p>
                  </div>
-                  <!-- Testimonial 3 (ksi dsk) -->
                  <div class="testimonial-card">
                      <p class="quote">フルマラソンを目指してランニングを始めましたが、膝の痛みに悩まされていました。BACK AGINGを訪れ、1回目のセッションで歩く感覚が変わり、以降、体の連動性の重要性を実感し、膝の痛みもなくなりました。</p>
                      <p class="author">- ksi dsk 様 (ランニング愛好家)</p>
                  </div>
-                 <!-- Testimonial 6 (重田優美子) - Focusing on knee pain -->
                  <div class="testimonial-card">
                      <p class="quote">膝の痛みで通い始めましたが、調整をしていただき、長時間歩いても痛みが出なくなりました。</p>
                      <p class="author">- 重田優美子 様</p>
                  </div>
-                  <!-- Testimonial 7 (k Y) - Focusing on knee pain -->
                   <div class="testimonial-card">
                       <p class="quote">マラソン中の膝の痛みに悩んでいましたが、和田さんから連動性トレーニングを教えていただき、膝の痛みなく走れるようになりました。体の使い方でこんなに違うとは驚きです。</p>
                       <p class="author">- k Y 様 (マラソンランナー)</p>
                   </div>
-                  <!-- Testimonial 8 (Tomotaro Murata) - Focusing on knee pain -->
                   <div class="testimonial-card">
                      <p class="quote">右膝の痛みと左膝半月板手術後、リハビリランがうまくいかず、マラソン復帰は無理かと思っていましたが、BACK AGINGでの連動性トレーニングにより、痛みを感じずにパフォーマンスを取り戻せました。</p>
                      <p class="author">- Tomotaro Murata 様 (マラソンランナー)</p>
                  </div>
-                 <!-- Testimonial 9 (岸本勝也) - Focusing on knee pain -->
                  <div class="testimonial-card">
                      <p class="quote">ランナー膝の治療をきっかけに通い始め、5キロ走るだけで激痛だったのが、100キロマラソン完走、フルマラソンで自己ベストを1時間更新できました。痛みの根本原因にフォーカスする治療の効果は素晴らしいです。</p>
                      <p class="author">- 岸本勝也 様 (マラソンランナー)</p>
                  </div>
-                 <!-- Testimonial 10 (小林朋子) - Focusing on knee pain -->
                  <div class="testimonial-card">
                      <p class="quote">膝が痛くて歩けず、整形外科での治療も効果がありませんでしたが、BACK AGINGでのわずかな動きを毎日続けた結果、体が軽く動けるようになりました。</p>
                      <p class="author">- 小林朋子 様</p>
                  </div>
-                 <!-- Testimonial placeholder for non-knee pain or general positive feedback -->
-                 <div class="testimonial-card bg-gray-50">
-                     <p class="quote">その他、腰痛や肩こり、パフォーマンスアップなど、多くの方から喜びの声をいただいています。</p>
-                     <p class="author">- BACK AGING スタッフ</p>
+                 <div class="testimonial-card">
+                      <p class="quote">椎間板ヘルニアで走れなくなり、マラソン大会も諦めていましたが、BACK AGINGに通い始め、トレーナーの指導で悪い動きを修正し、練習を再開できました。</p>
+                      <p class="author">- z34 kk 様 (マラソン愛好家)</p>
                  </div>
              </div>
-             <!-- Add a link to more testimonials if available -->
-             <!-- <div class="text-center mt-12">
-                 <a href="[Link to full testimonials page]" class="text-primary hover:underline font-medium">もっとお客様の声を見る <i data-lucide="arrow-right" class="inline w-4 h-4"></i></a>
-             </div> -->
         </div>
     </section>
 
@@ -466,6 +479,7 @@
          <div class="container-section">
              <h2 class="text-center mb-12 md:mb-16">初回治療セッションの流れ</h2>
              <div class="max-w-2xl mx-auto">
+                  <!-- Step items - Icon bg and line color now Teal -->
                  <div class="step-item">
                      <div class="icon-wrapper">1</div>
                      <h4>STEP 1：カウンセリング</h4>
@@ -486,7 +500,7 @@
                      <h4>STEP 4：セルフケア指導・今後</h4>
                      <p>本日のセッションを踏まえ、ご自宅でできる最適なセルフトレーニングメニューをご提案します。復習用の動画も個別に送付。LINEでの個別サポート（クラブ会員特典）もご案内します。</p>
                  </div>
-                  <div class="mt-12 text-center bg-blue-50 p-6 rounded-lg border border-blue-200">
+                   <div class="mt-12 text-center bg-teal-50 p-6 rounded-lg border border-teal-200">
                      <p class="font-semibold text-lg text-text-dark mb-2"><i data-lucide="info" class="inline w-5 h-5 mr-1"></i> ご来店の際のお願い</p>
                      <p>特別なご用意は必要ありません。動きやすい服装（Tシャツ、ジャージなど）をご準備ください。<br>ご予約時間の10分前を目安にお越しください。</p>
                  </div>
@@ -495,19 +509,19 @@
      </section>
 
     <!-- Section 8: Offer + CTA -->
-    <section id="offer" class="py-16 md:py-20 lg:py-24 bg-gradient-to-r from-primary to-blue-700 text-white">
+     <section id="offer" class="py-16 md:py-20 lg:py-24 bg-gradient-to-r from-primary to-teal-700 text-white">
         <div class="container-section text-center">
             <h2 class="text-white mb-6">膝の痛みがあったことすら忘れる日々へ</h2>
-             <p class="text-xl md:text-2xl text-blue-100 mb-8 max-w-3xl mx-auto">
+              <p class="text-xl md:text-2xl text-teal-100 mb-8 max-w-3xl mx-auto">
                 まずは本当の原因を一緒に見つけませんか？<br>
                 初回治療体験では、あなたの膝痛の根本原因を明確にし、<br class="hidden sm:inline">連動性療法が効果的かどうかをしっかり確認します。
             </p>
-            <a href="#booking-form-or-link" class="btn-cta mb-6"> <!-- Needs actual booking link/form target -->
+            <a href="#booking-form-or-link" class="btn-cta mb-6">
                 <i data-lucide="calendar-check" class="w-6 h-6"></i>
                 今すぐ初回治療を予約する
             </a>
             <p class="mb-8">
-                <a href="tel:070-9298-1284" class="text-white hover:text-blue-200 text-xl font-semibold inline-flex items-center gap-2">
+                  <a href="tel:070-9298-1284" class="text-white hover:text-teal-200 text-xl font-semibold inline-flex items-center gap-2">
                     <i data-lucide="phone-call" class="w-5 h-5"></i>
                     <span>070-9298-1284 でも予約受付中</span>
                 </a>
@@ -516,7 +530,7 @@
             <!-- Guarantee -->
             <div class="bg-white/10 backdrop-blur-sm rounded-lg p-6 max-w-2xl mx-auto border border-white/20">
                 <h4 class="text-lg font-semibold text-white mb-2"><i data-lucide="shield-check" class="inline w-5 h-5 mr-1"></i> 安心の返金保証</h4>
-                <p class="text-blue-100 text-sm">
+                 <p class="text-teal-100 text-sm">
                     残念ながら、一部の方（過去の手術による物理的な可動域制限、先天的な器質的問題など）には、連動性療法の効果が限定的な場合があります。初回体験で痛みの改善や可動域の改善に全く効果が見られなかった場合は、料金を全額返金いたします。
                 </p>
             </div>
@@ -528,7 +542,6 @@
         <div class="container-section">
             <h2 class="text-center mb-12 md:mb-16">よくあるご質問</h2>
             <div class="max-w-3xl mx-auto">
-                <!-- FAQ Item 1 -->
                 <div x-data="{ open: false }" class="faq-item">
                     <div @click="open = !open" class="faq-question">
                         <h4 :class="{ 'text-primary': open }">どんな服装で行けばいいですか？持ち物は？</h4>
@@ -538,7 +551,6 @@
                         <p>Tシャツやジャージ、スウェットなど、動きやすい服装でお越しください。お着替えスペースもご用意しております。特に必要な持ち物はございませんが、汗をかきやすい方はタオルなどをお持ちください。</p>
                     </div>
                 </div>
-                 <!-- FAQ Item 2 -->
                  <div x-data="{ open: false }" class="faq-item">
                      <div @click="open = !open" class="faq-question">
                          <h4 :class="{ 'text-primary': open }">治療は痛いですか？ボキボキしますか？</h4>
@@ -548,7 +560,6 @@
                          <p>いいえ、BACK AGINGの連動性療法は、痛みを伴う施術や、関節をボキボキ鳴らすような手技は行いません。身体の連動性を高めるための、無理のない範囲での運動療法が中心となります。痛みを感じる場合はすぐにお知らせください。</p>
                      </div>
                  </div>
-                  <!-- FAQ Item 3 -->
                   <div x-data="{ open: false }" class="faq-item">
                      <div @click="open = !open" class="faq-question">
                          <h4 :class="{ 'text-primary': open }">どのくらいの頻度で通えばいいですか？</h4>
@@ -558,7 +569,6 @@
                          <p>お客様のお身体の状態や目標によって異なります。初回体験時に状態を詳しく評価させていただき、最適な通院頻度やプランをご提案させていただきます。最初は週1回程度から始め、改善に合わせて頻度を調整していくケースが多いです。</p>
                      </div>
                  </div>
-                  <!-- FAQ Item 4 -->
                   <div x-data="{ open: false }" class="faq-item">
                      <div @click="open = !open" class="faq-question">
                          <h4 :class="{ 'text-primary': open }">健康保険は使えますか？</h4>
@@ -568,7 +578,6 @@
                          <p>申し訳ございませんが、健康保険は適用外となります。BACK AGINGは自由診療のパーソナルトレーニング施設です。</p>
                      </div>
                  </div>
-                  <!-- FAQ Item 5 -->
                   <div x-data="{ open: false }" class="faq-item">
                      <div @click="open = !open" class="faq-question">
                          <h4 :class="{ 'text-primary': open }">クレジットカードは使えますか？</h4>
@@ -578,7 +587,6 @@
                          <p>はい、ご利用いただけます。現金以外に、主要なクレジットカード（VISA, Master, Amex）、交通系IC、iD、QUICPay、PayPayなど、各種キャッシュレス決済に対応しております。</p>
                      </div>
                  </div>
-                 <!-- Add more FAQs as needed -->
             </div>
         </div>
     </section>
@@ -599,7 +607,7 @@
                  そのために、私たちは日々、知識と技術の研鑽を重ねています。<br>
                  あなたにお会いできることを、スタッフ一同、心より楽しみにしています。
              </p>
-             <a href="#offer" class="btn-cta"> <!-- Repeat CTA, linking to offer section -->
+             <a href="#offer" class="btn-cta">
                  <i data-lucide="check-circle"></i>
                  初回治療体験に申し込む
              </a>
@@ -613,8 +621,10 @@
                  <!-- Column 1: About -->
                  <div>
                      <h5 class="text-lg font-semibold text-white mb-4">BACK AGING 鎌倉由比ヶ浜店</h5>
-                     <p class="text-sm mb-2">〒248-0014<br>神奈川県鎌倉市由比ガ浜４丁目１０−７ ROUTE由比ヶ浜 2階</p>
-                     <p class="text-sm">江ノ島電鉄「由比ヶ浜駅」徒歩3分</p>
+                      <p class="text-sm mb-2">
+                          〒248-0016<br>神奈川県鎌倉市長谷2-2-10
+                      </p>
+                     <p class="text-sm">江ノ島電鉄「由比ヶ浜駅」徒歩3分 / 「長谷駅」徒歩4分</p>
                  </div>
                  <!-- Column 2: Links -->
                  <div>
@@ -630,12 +640,12 @@
                  <!-- Column 3: Contact -->
                  <div>
                      <h5 class="text-lg font-semibold text-white mb-4">ご予約・お問い合わせ</h5>
-                     <a href="tel:070-9298-1284" class="text-white hover:text-blue-300 text-lg font-semibold inline-flex items-center gap-2 mb-2">
+                      <a href="tel:070-9298-1284" class="text-white hover:text-teal-300 text-lg font-semibold inline-flex items-center gap-2 mb-2">
                          <i data-lucide="phone" class="w-5 h-5"></i>
                          <span>070-9298-1284</span>
                      </a>
                      <p class="text-sm">受付: 平日9:30-21:00 / 土日祝8:00-19:30</p>
-                     <a href="#offer" class="inline-block mt-4 px-4 py-2 bg-primary text-white text-sm rounded hover:bg-blue-700 transition-colors">
+                      <a href="#offer" class="inline-block mt-4 px-4 py-2 bg-primary text-white text-sm rounded hover:bg-teal-700 transition-colors">
                          Webで初回予約する
                      </a>
                  </div>
@@ -645,7 +655,6 @@
              </div>
         </div>
     </footer>
-
 
     <!-- Lucide Icons Script -->
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
@@ -661,10 +670,8 @@
         // Set current year in footer
         document.getElementById('current-year').textContent = new Date().getFullYear();
 
-        // Alpine.js initialization (can be expanded later if needed)
+        // Alpine.js initialization
         document.addEventListener('alpine:init', () => {
-            // You can define global stores or components here if necessary
-            // Alpine.data('myComponent', () => ({ ... }))
             console.log('Alpine.js initialized.');
         });
     </script>
