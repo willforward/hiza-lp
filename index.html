@@ -171,7 +171,7 @@
             </a>
 
             <!-- Desktop Navigation -->
-            <nav class="hidden md:flex space-x-6">
+            <nav class="hidden md:flex items-center space-x-6">
                 <a href="#introduction" class="text-sm font-medium text-gray-700 hover:text-primary">私たちについて</a>
                 <a href="#knee-pain" class="text-sm font-medium text-gray-700 hover:text-primary">膝痛の原因</a>
                 <a href="#approach" class="text-sm font-medium text-gray-700 hover:text-primary">連動性療法とは</a>
@@ -179,6 +179,10 @@
                 <a href="#flow" class="text-sm font-medium text-gray-700 hover:text-primary">施術の流れ</a>
                 <a href="#offer" class="text-sm font-medium text-gray-700 hover:text-primary">ご予約</a>
                 <a href="#faq" class="text-sm font-medium text-gray-700 hover:text-primary">FAQ</a>
+                <!-- Added CTA Button -->
+                <a href="#offer" class="ml-4 inline-flex items-center justify-center px-4 py-2 bg-cta-orange text-white rounded-md font-semibold text-sm hover:bg-orange-600 transition-colors duration-300 shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cta-orange">
+                    初回治療を予約
+                </a>
             </nav>
 
             <!-- Mobile Menu Button -->
@@ -199,44 +203,80 @@
             <a href="#flow" @click="open = false" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-primary">施術の流れ</a>
             <a href="#offer" @click="open = false" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-primary">ご予約</a>
             <a href="#faq" @click="open = false" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-primary">FAQ</a>
+            <!-- Added CTA Button in Mobile Menu -->
+            <div class="px-4 pt-3 pb-2">
+                <a href="#offer" @click="open = false" class="block w-full text-center px-4 py-2 bg-cta-orange text-white rounded-md font-semibold text-sm hover:bg-orange-600 transition-colors duration-300 shadow-sm">
+                    初回治療を予約する
+                </a>
+            </div>
         </nav>
     </header>
 
     <!-- Section 1: First View (Hero) -->
-    <section id="hero" class="bg-gradient-to-b from-teal-50 via-white to-white min-h-[85vh] flex items-center py-16 md:py-20 lg:py-24">
+    <section id="hero" class="bg-gradient-to-b from-teal-50 via-white to-white py-2 md:py-16 lg:py-10 flex items-center">
         <div class="container-section">
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-16 items-center">
-                <!-- Left: Text Content -->
-                <div class="text-center md:text-left order-2 md:order-1">
-                    <h1 class="font-bold mb-6 text-balance !leading-snug md:!leading-snug lg:!leading-snug">
+            <!-- Grid for complex Mobile and Desktop layout -->
+            <div class="grid grid-cols-2 md:grid-cols-2 gap-x-4 md:gap-x-12 lg:gap-x-16 gap-y-4 md:gap-y-6 items-start">
+
+                <!-- Mobile: Left Col (H1 + Disclaimer) / Desktop: Left Col (H1) -->
+                <div class="col-span-1 flex flex-col order-1 md:col-span-1 md:row-start-1 md:order-1">
+                    <h1 class="font-bold text-balance text-left text-2xl sm:text-3xl md:text-4xl lg:text-5xl !leading-snug md:!leading-snug lg:!leading-snug mb-2">
                         膝が痛い。<br>
                         階段がつらい。<br>
-                        その膝痛、手術せずに<br>
-                        <span class="text-primary">根本から改善できます。</span>
+                        その膝痛、<br class="md:hidden">
+                        手術せずに<br>
+                        <span class="hidden md:inline"> </span>
+                        <span class="text-primary">根本から<br class="md:hidden">改善できます。</span>
                     </h1>
-                    <p class="text-lg md:text-xl text-text-default mb-8 max-w-xl mx-auto md:mx-0">
+                    <!-- Disclaimer (Visible only on mobile in this column) -->
+                    <p class="md:hidden text-[6px] text-gray-500 mt-1 text-left">
+                        ※本画像は、イメージを伝えたくてAIで生成した画像です。施術の結果を保証するものではありません。気になる効果に関しては、実際に施術体験された方の変化やコメントを、ご本人が投稿されたクチコミからご確認ください。
+                    </p>
+                </div>
+
+                <!-- Mobile: Right Col (Image) / Desktop: Right Col (Image + Disclaimer) -->
+                <div class="col-span-1 order-2 md:col-start-2 md:row-start-1 md:row-span-3 md:order-2">
+                    <div class="relative h-auto md:h-96 lg:h-[32rem]">
+                         <!-- Use <picture> element for responsive images -->
+                         <picture>
+                            <!-- Source for mobile (max-width: 767px) -->
+                            <source media="(max-width: 767px)" srcset="images/fv-sp.png">
+                            <!-- Default image for desktop and fallback -->
+                            <img src="images/fv-02.png" alt="膝痛改善 前後の比較写真" class="w-full h-full object-cover rounded-xl shadow-lg overflow-hidden" loading="lazy">
+                         </picture>
+                    </div>
+                     <!-- Disclaimer (Visible below image on Desktop) -->
+                    <p class="hidden md:block text-xs text-gray-500 mt-2 text-left">
+                        ※本画像は、イメージを伝えたくてAIで生成した画像です。施術の結果を保証するものではありません。気になる効果に関しては、実際に施術体験された方の変化やコメントを、ご本人が投稿されたクチコミからご確認ください。
+                    </p>
+                </div>
+
+                 <!-- Mobile: Below Grid (Sub copy) / Desktop: Left Col (Sub copy) -->
+                 <div class="col-span-2 md:col-span-1 order-3 md:row-start-2 md:order-3">
+                    <p class="text-sm sm:text-base md:text-lg text-text-default text-center md:text-left max-w-xl mx-auto md:mx-0 mt-4 md:mt-0">
                         マッサージや薬では、なかなか良くならなかった膝の痛みが、BACK AGINGの『連動性療法』で変えられるかもしれません。 もし、真剣に根本解決を考えていて、これからの人生でも本当にやりたいことを諦めずに楽しめる毎日を取り戻したいと思うなら、ぜひご一読の上、ご判断ください。
                     </p>
-                    <div class="flex flex-col sm:flex-row justify-center md:justify-start items-center gap-4 md:gap-6">
-                        <a href="#offer" class="btn-cta w-full sm:w-auto">
-                            <i data-lucide="calendar-plus" class="w-5 h-5"></i>
+                 </div>
+
+                <!-- Mobile: Below Grid (CTA + Contact) / Desktop: Left Col (CTA + Contact) -->
+                <div class="col-span-2 md:col-span-1 order-4 md:row-start-3 md:order-4">
+                     <div class="flex flex-col sm:flex-row justify-center md:justify-start items-center gap-3 md:gap-6 mt-4 md:mt-6">
+                        <a href="#offer" class="btn-cta w-full sm:w-auto text-sm md:text-lg px-4 sm:px-6 md:px-8 py-2 md:py-3">
+                            <i data-lucide="calendar-plus" class="w-4 h-4 md:w-5 md:h-5"></i>
                             <span>初回治療を予約する</span>
                         </a>
-                        <a href="tel:070-9298-1284" class="tel-link text-lg">
-                            <i data-lucide="phone" class="w-5 h-5"></i>
+                        <a href="tel:070-9298-1284" class="tel-link text-primary text-sm md:text-lg mt-2 sm:mt-0">
+                            <i data-lucide="phone" class="w-4 h-4 md:w-5 md:h-5"></i>
                             <span>070-9298-1284</span>
                         </a>
                     </div>
-                      <p class="text-sm text-gray-600 mt-4 text-center md:text-left">
-                          お気軽にお問い合わせください<br class="sm:hidden">
-                          （受付時間：平日9:30-21:00 / 土日祝8:00-19:30）
-                      </p>
+                    <p class="text-xs md:text-sm text-gray-600 mt-3 md:mt-4 text-center md:text-left">
+                        お気軽にお問い合わせください
+                        <br class="block sm:hidden md:hidden">
+                        （受付時間：平日9:30-21:00 / 土日祝8:00-19:30）
+                    </p>
                 </div>
 
-                <!-- Right: Image Replaced -->
-                <div class="relative order-1 md:order-2 h-80 md:h-96 lg:h-[32rem] rounded-xl shadow-lg overflow-hidden bg-gray-100">
-                    <img src="images/fv.png" alt="膝痛改善 前後の比較写真" class="w-full h-full object-contain" loading="lazy">
-                </div>
             </div>
         </div>
     </section>
@@ -521,7 +561,7 @@
                 今すぐ初回治療を予約する
             </a>
             <p class="mb-8">
-                  <a href="tel:070-9298-1284" class="text-white hover:text-teal-200 text-xl font-semibold inline-flex items-center gap-2">
+                  <a href="tel:070-9298-1284" class="tel-link text-white hover:text-teal-200 text-xl font-semibold inline-flex items-center gap-2">
                     <i data-lucide="phone-call" class="w-5 h-5"></i>
                     <span>070-9298-1284 でも予約受付中</span>
                 </a>
