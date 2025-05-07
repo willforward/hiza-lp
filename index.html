@@ -154,13 +154,117 @@
              .faq-answer p + p {
                  @apply mt-2;
              }
+             /* FAQ CTAボタンのテキスト色を白にする */
+             .faq-answer a.bg-cta-orange {
+                 @apply text-white hover:text-white;
+             }
+            .marker-yellow { /* Renamed from marker-orange */
+                background: linear-gradient(to top, #FDE047 30%, transparent 30%); /* Yellow-300 for marker */
+                @apply px-1 -mx-1 font-semibold; /* Adjust spacing slightly and add font-semibold for bold */
+            }
         }
         @layer utilities {
             .text-balance { text-wrap: balance; }
+            .animate-on-scroll-init {
+                @apply opacity-0 translate-y-8;
+            }
+            .animate-on-scroll-active {
+                @apply opacity-100 translate-y-0 transition-all duration-1000 ease-out; /* duration-700 から duration-1000 に変更 */
+            }
+        }
+        .popup-content-wada {
+            background-image: url('images/wada.webp');
+            background-repeat: no-repeat;
+            background-position: center center; /* 中央に配置 */
+            background-size: cover; /* コンテナに合わせて調整、または contain など */
+            position: relative; /* テキストを上に重ねるために必要に応じて */
+            z-index: 1; /* テキストを上に重ねるために必要に応じて */
+        }
+        .popup-content-wada::before { /* 画像の上に半透明のレイヤーを重ねる場合 */
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(255, 255, 255, 0.85); /* 白色の85%透明 */
+            z-index: -1; /* 画像とテキストの間に配置 */
+        }
+        .popup-content-hamaki {
+            background-image: url('images/hamaki.webp');
+            background-repeat: no-repeat;
+            background-position: center center;
+            background-size: cover;
+            position: relative;
+            z-index: 1;
+        }
+        .popup-content-hamaki::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(255, 255, 255, 0.85);
+            z-index: -1;
+        }
+        .popup-content-yamada {
+            background-image: url('images/yamada.webp');
+            background-repeat: no-repeat;
+            background-position: center center;
+            background-size: cover;
+            position: relative;
+            z-index: 1;
+        }
+        .popup-content-yamada::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(255, 255, 255, 0.85);
+            z-index: -1;
+        }
+        .popup-content-takamura {
+            background-image: url('images/takamura.webp');
+            background-repeat: no-repeat;
+            background-position: center center;
+            background-size: cover;
+            position: relative;
+            z-index: 1;
+        }
+        .popup-content-takamura::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(255, 255, 255, 0.85);
+            z-index: -1;
+        }
+        .popup-content-kamitani {
+            background-image: url('images/kamitani.webp');
+            background-repeat: no-repeat;
+            background-position: center center;
+            background-size: cover;
+            position: relative;
+            z-index: 1;
+        }
+        .popup-content-kamitani::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(255, 255, 255, 0.85);
+            z-index: -1;
         }
     </style>
 </head>
-<body class="bg-white">
+<body class="bg-white" x-data="{ openModal: null }">
 
     <!-- Sticky Header -->
     <header x-data="{ open: false }" class="sticky top-0 z-50 bg-white shadow-md">
@@ -175,7 +279,7 @@
                 <a href="#introduction" class="text-sm font-medium text-gray-700 hover:text-primary">私たちについて</a>
                 <a href="#knee-pain" class="text-sm font-medium text-gray-700 hover:text-primary">膝痛の原因</a>
                 <a href="#approach" class="text-sm font-medium text-gray-700 hover:text-primary">連動性療法とは</a>
-                <a href="#testimonials" class="text-sm font-medium text-gray-700 hover:text-primary">お客様の声</a>
+                <a href="#testimonials" class="text-sm font-medium text-gray-700 hover:text-primary">お客さまの声</a>
                 <a href="#flow" class="text-sm font-medium text-gray-700 hover:text-primary">施術の流れ</a>
                 <a href="#offer" class="text-sm font-medium text-gray-700 hover:text-primary">ご予約</a>
                 <a href="#faq" class="text-sm font-medium text-gray-700 hover:text-primary">FAQ</a>
@@ -199,7 +303,7 @@
             <a href="#introduction" @click="open = false" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-primary">私たちについて</a>
             <a href="#knee-pain" @click="open = false" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-primary">膝痛の原因</a>
             <a href="#approach" @click="open = false" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-primary">連動性療法とは</a>
-            <a href="#testimonials" @click="open = false" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-primary">お客様の声</a>
+            <a href="#testimonials" @click="open = false" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-primary">お客さまの声</a>
             <a href="#flow" @click="open = false" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-primary">施術の流れ</a>
             <a href="#offer" @click="open = false" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-primary">ご予約</a>
             <a href="#faq" @click="open = false" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-primary">FAQ</a>
@@ -219,7 +323,7 @@
             <div class="grid grid-cols-2 md:grid-cols-2 gap-x-4 md:gap-x-12 lg:gap-x-16 gap-y-4 md:gap-y-6 items-start">
 
                 <!-- Mobile: Left Col (H1 + Disclaimer) / Desktop: Left Col (H1) -->
-                <div class="col-span-1 flex flex-col order-1 md:col-span-1 md:row-start-1 md:order-1">
+                <div class="col-span-1 flex flex-col order-1 md:col-span-1 md:row-start-1 md:order-1 animate-on-scroll animate-on-scroll-init">
                     <h1 class="font-bold text-balance text-left text-2xl sm:text-3xl md:text-4xl lg:text-5xl !leading-snug md:!leading-snug lg:!leading-snug mb-2">
                         膝が痛い。<br>
                         階段がつらい。<br>
@@ -235,7 +339,7 @@
                 </div>
 
                 <!-- Mobile: Right Col (Image) / Desktop: Right Col (Image + Disclaimer) -->
-                <div class="col-span-1 order-2 md:col-start-2 md:row-start-1 md:row-span-3 md:order-2">
+                <div class="col-span-1 order-2 md:col-start-2 md:row-start-1 md:row-span-3 md:order-2 animate-on-scroll animate-on-scroll-init">
                     <div class="relative h-auto md:h-96 lg:h-[32rem]">
                          <!-- Use <picture> element for responsive images -->
                          <picture>
@@ -252,14 +356,14 @@
                 </div>
 
                  <!-- Mobile: Below Grid (Sub copy) / Desktop: Left Col (Sub copy) -->
-                 <div class="col-span-2 md:col-span-1 order-3 md:row-start-2 md:order-3">
+                 <div class="col-span-2 md:col-span-1 order-3 md:row-start-2 md:order-3 animate-on-scroll animate-on-scroll-init">
                     <p class="text-sm sm:text-base md:text-lg text-text-default text-center md:text-left max-w-xl mx-auto md:mx-0 mt-4 md:mt-0">
                         マッサージや薬では、なかなか良くならなかった膝の痛みが、BACK AGINGの『連動性療法』で変えられるかもしれません。 もし、真剣に根本解決を考えていて、これからの人生でも本当にやりたいことを諦めずに楽しめる毎日を取り戻したいと思うなら、ぜひご一読の上、ご判断ください。
                     </p>
                  </div>
 
                 <!-- Mobile: Below Grid (CTA + Contact) / Desktop: Left Col (CTA + Contact) -->
-                <div class="col-span-2 md:col-span-1 order-4 md:row-start-3 md:order-4">
+                <div class="col-span-2 md:col-span-1 order-4 md:row-start-3 md:order-4 animate-on-scroll animate-on-scroll-init">
                      <div class="flex flex-col sm:flex-row justify-center md:justify-start items-center gap-3 md:gap-6 mt-4 md:mt-6">
                         <a href="#offer" class="btn-cta w-full sm:w-auto text-sm md:text-lg px-4 sm:px-6 md:px-8 py-2 md:py-3">
                             <i data-lucide="calendar-plus" class="w-4 h-4 md:w-5 md:h-5"></i>
@@ -284,7 +388,7 @@
     <!-- Section 2: Future Pacing -->
     <section id="future" class="py-16 md:py-20 lg:py-24 bg-secondary">
         <div class="container-section">
-            <div class="max-w-3xl mx-auto text-center">
+            <div class="max-w-3xl mx-auto text-center animate-on-scroll animate-on-scroll-init">
                 <h2 class="mb-6">
                     痛みを忘れた毎日が、<br class="sm:hidden">あなたを待っています。
                 </h2>
@@ -294,11 +398,11 @@
             </div>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12 items-center">
                 <!-- Image Replaced & Resized -->
-                <div class="relative h-72 md:h-96 aspect-square rounded-xl shadow-md overflow-hidden bg-gray-100 mx-auto">
+                <div class="relative h-72 md:h-96 aspect-square rounded-xl shadow-md overflow-hidden bg-gray-100 mx-auto animate-on-scroll animate-on-scroll-init">
                     <img src="images/future.png" alt="膝の痛みがなくなり、笑顔で趣味を楽しむ様子" class="w-full h-full object-cover" loading="lazy">
                 </div>
                 <!-- Benefit List -->
-                <div>
+                <div class="animate-on-scroll animate-on-scroll-init">
                     <ul class="list-check text-lg mb-8">
                         <li><i data-lucide="check-circle-2"></i>ランニングやテニス、ゴルフなどスポーツを楽しむ</li>
                         <li><i data-lucide="check-circle-2"></i>登山や旅行で新しい景色に出会う</li>
@@ -322,7 +426,7 @@
     <!-- Section 3: Introduction -->
     <section id="introduction" class="py-16 md:py-20 lg:py-24">
         <div class="container-section">
-             <div class="max-w-3xl mx-auto text-center mb-12 md:mb-16">
+             <div class="max-w-3xl mx-auto text-center mb-12 md:mb-16 animate-on-scroll animate-on-scroll-init">
                 <h2 class="mb-4">
                     医療系国家資格者だけの専門チームが<br class="sm:hidden"> あなたの膝を根本改善へ導きます。
                 </h2>
@@ -333,43 +437,68 @@
             <!-- Staff Grid -->
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mb-12 md:mb-16">
                 <!-- 和田 有稀奈 -->
-                <div class="staff-card">
+                <div class="staff-card animate-on-scroll animate-on-scroll-init">
                     <img src="images/wada.webp" alt="和田 有稀奈 トレーナー" class="w-24 h-24 rounded-full mx-auto mb-4 object-cover" loading="lazy">
                     <h3 class="name">和田 有稀奈<span class="roman">Yukina Wada</span></h3>
                     <p class="qualification">連動性トレーナー・鍼灸師</p>
-                    <p class="specialty">得意分野：膝の悩み、痛みの根本改善、スポーツ復帰支援</p>
+                    <div class="staff-intro-short"> <!-- 初期表示用紹介文コンテナ -->
+                        <p class="text-sm text-gray-600 mb-2">
+                            「痛みの解消は諦めていたが、今では痛みがなくなった！」と感動の声をいただいている。特に膝疾患に関しては、自身が3度の手術を経験したことからも思い入れが強い
+                        </p>
+                        <button @click="openModal = 'wada'" class="text-sm text-primary hover:underline focus:outline-none">詳しく見る</button>
+                    </div>
                 </div>
                  <!-- 浜木 遼太 -->
-                <div class="staff-card">
+                <div class="staff-card animate-on-scroll animate-on-scroll-init">
                     <img src="images/hamaki.webp" alt="浜木 遼太 トレーナー" class="w-24 h-24 rounded-full mx-auto mb-4 object-cover" loading="lazy">
                     <h3 class="name">浜木 遼太<span class="roman">Ryota Hamaki</span></h3>
                     <p class="qualification">連動性トレーナー・鍼灸師</p>
-                    <p class="specialty">得意分野：腰痛・肩こり、痛みの根本改善、ランナーサポート</p>
+                    <div class="staff-intro-short">
+                        <p class="text-sm text-gray-600 mb-2">
+                            腰痛椎間板ヘルニア、変形性股関節症、五十肩など「いろいろな治療院に通っても改善しなかった」と言う重度の患者様の根本改善をサポート
+                        </p>
+                        <button @click="openModal = 'hamaki'" class="text-sm text-primary hover:underline focus:outline-none">詳しく見る</button>
+                    </div>
                 </div>
                  <!-- 山田 紘暉 -->
-                <div class="staff-card">
+                <div class="staff-card animate-on-scroll animate-on-scroll-init">
                     <img src="images/yamada.webp" alt="山田 紘暉 トレーナー" class="w-24 h-24 rounded-full mx-auto mb-4 object-cover" loading="lazy">
                     <h3 class="name">山田 紘暉<span class="roman">Hiroki Yamada</span></h3>
                     <p class="qualification">連動性トレーナー・理学療法士</p>
-                    <p class="specialty">得意分野：スポーツ障害（特にランニング）、動作分析・改善、怪我からの復帰</p>
+                    <div class="staff-intro-short">
+                        <p class="text-sm text-gray-600 mb-2">
+                            理学療法を基礎としながらも、怪我の根本改善には、動作分析や動作改善が必須と考え、連動性トレーナーに。歩行時痛・走行時痛の改善を専門として活躍
+                        </p>
+                        <button @click="openModal = 'yamada'" class="text-sm text-primary hover:underline focus:outline-none">詳しく見る</button>
+                    </div>
                 </div>
                  <!-- 高村 武光 -->
-                 <div class="staff-card">
+                 <div class="staff-card animate-on-scroll animate-on-scroll-init">
                     <img src="images/takamura.webp" alt="高村 武光 トレーナー" class="w-24 h-24 rounded-full mx-auto mb-4 object-cover" loading="lazy">
                     <h3 class="name">高村 武光<span class="roman">Takemitsu Takamura</span></h3>
                     <p class="qualification">連動性トレーナー・鍼灸師</p>
-                    <p class="specialty">得意分野：変形性関節症（股関節・膝）、高齢者リハビリ、オンライン対応</p>
+                    <div class="staff-intro-short">
+                        <p class="text-sm text-gray-600 mb-2">
+                            変形性股関節症や変形性膝関節症などの高齢者の患者さんを受け持つことや、オンライン治療での実践経験も豊富
+                        </p>
+                        <button @click="openModal = 'takamura'" class="text-sm text-primary hover:underline focus:outline-none">詳しく見る</button>
+                    </div>
                 </div>
                  <!-- 紙谷 友希 -->
-                 <div class="staff-card">
+                 <div class="staff-card animate-on-scroll animate-on-scroll-init">
                     <img src="images/kamitani.webp" alt="紙谷 友希 トレーナー" class="w-24 h-24 rounded-full mx-auto mb-4 object-cover" loading="lazy">
                     <h3 class="name">紙谷 友希<span class="roman">Tomoki Kamitani</span></h3>
                     <p class="qualification">連動性トレーナー・理学療法士</p>
-                    <p class="specialty">得意分野：重度疾患のリハビリ（膝・腰・神経系など）、高齢者ケア、難治性の痛み</p>
+                    <div class="staff-intro-short">
+                        <p class="text-sm text-gray-600 mb-2">
+                            変形性膝関節症・五十肩・腰椎椎間板ヘルニア・脊柱管狭窄症など、重度疾患を中心に、連動性トレーニングをすべての症例に活用
+                        </p>
+                        <button @click="openModal = 'kamitani'" class="text-sm text-primary hover:underline focus:outline-none">詳しく見る</button>
+                    </div>
                 </div>
             </div>
             <!-- Google Review Highlight -->
-             <div class="google-review-box">
+             <div class="google-review-box animate-on-scroll animate-on-scroll-init">
                  <div class="text-center md:text-left">
                     <p class="text-lg font-semibold text-text-dark mb-2">Googleマップで高評価をいただいています！</p>
                     <div class="rating mb-4">
@@ -393,15 +522,105 @@
         </div>
     </section>
 
+    <!-- 浜木さん紹介文ポップアップ -->
+    <div x-show="openModal === 'hamaki'" @keydown.escape.window="openModal = null" class="fixed inset-0 z-[100] overflow-y-auto flex items-center justify-center bg-black bg-opacity-75 p-4" style="display: none;">
+        <div @click.away="openModal = null" class="popup-content-hamaki bg-white rounded-lg shadow-xl p-6 md:p-8 max-w-xl w-full mx-auto overflow-hidden">
+            <div class="flex justify-between items-center mb-4 relative z-10">
+                <h4 class="text-xl font-semibold text-text-dark">浜木 遼太｜連動性トレーナー・鍼灸師</h4>
+                <button @click="openModal = null" class="text-gray-500 hover:text-gray-700 focus:outline-none">
+                    <i data-lucide="x" class="w-6 h-6"></i>
+                </button>
+            </div>
+            <div class="text-sm text-gray-700 space-y-3 max-h-[60vh] overflow-y-auto pr-2 relative z-10 p-4 rounded">
+                <p>高校から陸上競技の中距離種目に取り組むも怪我に悩み、記録が伸び悩む。その後同じように怪我に苦しむ人をサポートしたいという気持ちから森ノ宮医療大学鍼灸学科に入学。在学中に連動トレーニングと出会い、高校時代より遥かに少ない練習量にも関わらず、800m、1500m、5000mで大幅に自己ベストを更新し、連動トレーニングの効果に衝撃を受ける。自分自身が身体の痛みから解放されて思いっきり走れた感動を届けたいとの思いから、卒業後、新卒でBACK AGING （バックエイジング）に入社。新卒一年目にも関わらず、腰痛椎間板ヘルニア、変形性股関節症、五十肩など「いろいろな治療院に通っても改善しなかった」と言う重度の患者様の根本改善をサポート。「浜木トレーナーにもっと昔に出会いたかった」と言う声を多くいただいている。そしてその実績が認められ、入社2年目にして由比ヶ浜店の店舗責任者に抜擢され、「いつまでも元気で挑戦し続けられる人を増やす挑戦」をスローガンに、日々痛みを抱える患者様と向きあい現在に至る。<br>陸上自己ベストは、800m 1分59秒、 1500m 4分3秒、フルマラソン2時間41分。</p>
+            </div>
+            <div class="mt-6 text-right relative z-10">
+                <button @click="openModal = null" class="px-4 py-2 bg-gray-200 text-gray-800 rounded-lg hover:bg-gray-300 focus:outline-none">閉じる</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 山田さん紹介文ポップアップ -->
+    <div x-show="openModal === 'yamada'" @keydown.escape.window="openModal = null" class="fixed inset-0 z-[100] overflow-y-auto flex items-center justify-center bg-black bg-opacity-75 p-4" style="display: none;">
+        <div @click.away="openModal = null" class="popup-content-yamada bg-white rounded-lg shadow-xl p-6 md:p-8 max-w-xl w-full mx-auto overflow-hidden">
+            <div class="flex justify-between items-center mb-4 relative z-10">
+                <h4 class="text-xl font-semibold text-text-dark">山田 紘暉｜連動性トレーナー・理学療法士</h4>
+                <button @click="openModal = null" class="text-gray-500 hover:text-gray-700 focus:outline-none">
+                    <i data-lucide="x" class="w-6 h-6"></i>
+                </button>
+            </div>
+            <div class="text-sm text-gray-700 space-y-3 max-h-[60vh] overflow-y-auto pr-2 relative z-10 p-4 rounded">
+                <p>中学3年生の時に、腰椎分離症で中学校最後のレースを棄権、続く高校時代はシンスプリント、股関節・臀部の怪我などで、一度も満足な練習が積めず、記録を伸ばせなかった。そんな過去から、怪我なくスポーツを楽しみチャレンジできることに大きな価値を感じ、名古屋大学にて理学療法士を志す。理学療法を基礎としながらも、怪我の根本改善には、動作分析や動作改善が必須と考え、連動性トレーナーに。大学卒業と同時にフリーランスとして独立し、歩行時痛・走行時痛の改善を専門として活躍。活現在は、一切の怪我を克服し、市民ランナーとしてもフルマラソンに挑戦中。自己ベストは2時間53分20秒。</p>
+            </div>
+            <div class="mt-6 text-right relative z-10">
+                <button @click="openModal = null" class="px-4 py-2 bg-gray-200 text-gray-800 rounded-lg hover:bg-gray-300 focus:outline-none">閉じる</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 高村さん紹介文ポップアップ -->
+    <div x-show="openModal === 'takamura'" @keydown.escape.window="openModal = null" class="fixed inset-0 z-[100] overflow-y-auto flex items-center justify-center bg-black bg-opacity-75 p-4" style="display: none;">
+        <div @click.away="openModal = null" class="popup-content-takamura bg-white rounded-lg shadow-xl p-6 md:p-8 max-w-xl w-full mx-auto overflow-hidden">
+            <div class="flex justify-between items-center mb-4 relative z-10">
+                <h4 class="text-xl font-semibold text-text-dark">高村 武光｜連動性トレーナー・鍼灸師</h4>
+                <button @click="openModal = null" class="text-gray-500 hover:text-gray-700 focus:outline-none">
+                    <i data-lucide="x" class="w-6 h-6"></i>
+                </button>
+            </div>
+            <div class="text-sm text-gray-700 space-y-3 max-h-[60vh] overflow-y-auto pr-2 relative z-10 p-4 rounded">
+                <p>小学4年生から野球を始め大学2年生まで野球選手として活動。高校2年生の時に脊椎分離症の診断を受け、リハビリを受けたことがきっかけで医療従事者を志すことを決意。スポーツ選手の他に変形性股関節症や変形性膝関節症などの高齢者の患者さんを受け持つことや、オンライン治療での実践経験も豊富。現在は、サッカー日本代表選手、韓国代表選手、パデル日本代表、などをはじめとしたエリートアスリートからも信頼されている。また、理学療法士・鍼灸師・柔道整復師・ATなどが参加する医療従事者向けの勉強会も定期主催し、後輩育成にも尽力中。<br>◯現在の活動<br>パデル日本代表（2023）北尾亜希選手 専属トレーナー<br>全日本パデル選手権専属トレーナー帯同（2022/2023）ベスト４<br>住吉高校野球部 フィジカルトレーナー<br>その他フリーランストレーナーとして個人選手をサポート<br>医療従事者向け勉強会主催</p>
+            </div>
+            <div class="mt-6 text-right relative z-10">
+                <button @click="openModal = null" class="px-4 py-2 bg-gray-200 text-gray-800 rounded-lg hover:bg-gray-300 focus:outline-none">閉じる</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 紙谷さん紹介文ポップアップ -->
+    <div x-show="openModal === 'kamitani'" @keydown.escape.window="openModal = null" class="fixed inset-0 z-[100] overflow-y-auto flex items-center justify-center bg-black bg-opacity-75 p-4" style="display: none;">
+        <div @click.away="openModal = null" class="popup-content-kamitani bg-white rounded-lg shadow-xl p-6 md:p-8 max-w-xl w-full mx-auto overflow-hidden">
+            <div class="flex justify-between items-center mb-4 relative z-10">
+                <h4 class="text-xl font-semibold text-text-dark">紙谷 友希｜連動性トレーナー・理学療法士</h4>
+                <button @click="openModal = null" class="text-gray-500 hover:text-gray-700 focus:outline-none">
+                    <i data-lucide="x" class="w-6 h-6"></i>
+                </button>
+            </div>
+            <div class="text-sm text-gray-700 space-y-3 max-h-[60vh] overflow-y-auto pr-2 relative z-10 p-4 rounded">
+                <p>先天性心臓疾患があり、幼少期から多くの病院に通ったことがきっかけで、医療に興味を持ち始める。その後、膝、肘、足首などの怪我を繰り返す中で、理学療法士のリハビリで救ってもらった経験から、治療・リハビリに興味持ち、関西医療大学保健医療学部理学療法学科に進学。大学では、学業の他に、認知症カフェの立ち上げ、介護施設でのアルバイトで入浴・移乗・食事など介護現場の全般を経験。大学2回生の時に連動性トレーナーの治療を受け、その感動が忘れられず、自身も連動性トレーナーの資格取得を決意する。学生時代から、優れた連動性トレーナーになるためには、自分の体で理論を実験する必要があるという考えから、マラソン3時間15分29秒（初フル）、1500m4分57秒、100kmウォーキング完歩、トレイル15km（標高1000m）など様々な新しい領域にチャレンジ。<br>　卒業後は、大阪デイサービスで理学療法士として就職し、高齢者リハビリテーションを担当。1日15人・1人30分の枠で、変形性膝関節症・腰椎圧迫骨折・片麻痺・頸部骨折・五十肩・石灰沈着・腰椎椎間板ヘルニア・脊柱管狭窄症・パーキンソン病など、重度疾患を中心に、連動性トレーニングをすべての症例に活用。2024年11月、更なる成長と貢献を求めて、BACK AGINGに入社。</p>
+            </div>
+            <div class="mt-6 text-right relative z-10">
+                <button @click="openModal = null" class="px-4 py-2 bg-gray-200 text-gray-800 rounded-lg hover:bg-gray-300 focus:outline-none">閉じる</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 和田さん紹介文ポップアップ -->
+    <div x-show="openModal === 'wada'" @keydown.escape.window="openModal = null" class="fixed inset-0 z-[100] overflow-y-auto flex items-center justify-center bg-black bg-opacity-75 p-4" style="display: none;">
+        <div @click.away="openModal = null" class="popup-content-wada bg-white rounded-lg shadow-xl p-6 md:p-8 max-w-xl w-full mx-auto overflow-hidden">
+            <div class="flex justify-between items-center mb-4 relative z-10">
+                <h4 class="text-xl font-semibold text-text-dark">和田有稀奈｜連動性トレーナー・鍼灸師</h4>
+                <button @click="openModal = null" class="text-gray-500 hover:text-gray-700 focus:outline-none">
+                    <i data-lucide="x" class="w-6 h-6"></i>
+                </button>
+            </div>
+            <div class="text-sm text-gray-700 space-y-3 max-h-[60vh] overflow-y-auto pr-2 relative z-10 p-4 rounded">
+                <p>女子サッカー選手を志すも、5年間で3度膝の手術を経験し、満足いく現役時代を送れなかった経験から「挑戦を諦める人を減らしたい」と医療従事者（鍼灸師）になる。イタリア女子フットサル代表のトレーナー活動などを経て、現在は、バックエイジングのトレーナーとして一人ひとりの身体の特徴に合わせてパーソナルサポートを実施している。お客さまからは「痛みの解消は諦めていたが、今では痛みがなくなり、バックエイジングと出会えてよかった」と感動の声をいただいている。特に膝疾患に関しては、自身が3度の手術を経験したことからも思い入れが強い。趣味はランニング。現在はフルマラソン3時間ギリに向けて挑戦中。</p>
+            </div>
+            <div class="mt-6 text-right relative z-10">
+                <button @click="openModal = null" class="px-4 py-2 bg-gray-200 text-gray-800 rounded-lg hover:bg-gray-300 focus:outline-none">閉じる</button>
+            </div>
+        </div>
+    </div>
+
     <!-- Section 4: Knee Pain Explanation -->
     <section id="knee-pain" class="py-16 md:py-20 lg:py-24 bg-secondary">
         <div class="container-section">
-            <h2 class="text-center mb-12 md:mb-16">
+            <h2 class="text-center mb-12 md:mb-16 animate-on-scroll animate-on-scroll-init">
                 膝痛は「膝そのもの」だけが原因ではありません。
             </h2>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12 items-center">
                 <!-- Text Column -->
-                <div>
+                <div class="animate-on-scroll animate-on-scroll-init">
                     <p class="mb-6">
                         マッサージや湿布、ヒアルロン酸注射などで一時的に楽になっても、痛みがぶり返してしまう…。それは、<strong class="text-primary">痛みの根本原因が膝以外にある</strong>可能性が高いからです。
                     </p>
@@ -416,8 +635,8 @@
                     </p>
                 </div>
                 <!-- Image Column: Wrapped img in div and increased size -->
-                <div>
-                     <img src="images/knee-pain.png" alt="正常な膝と変形性膝関節症の比較イラスト" class="h-80 md:h-96 lg:h-[30rem] w-full object-contain rounded-lg shadow-md" loading="lazy">
+                <div class="animate-on-scroll animate-on-scroll-init">
+                     <img src="images/knee-pain-2.png" alt="正常な膝と変形性膝関節症の比較イラスト" class="w-full object-contain rounded-lg shadow-md" loading="lazy">
                 </div>
             </div>
         </div>
@@ -426,7 +645,7 @@
      <!-- Section 5: BACK AGING Approach (Rendosei Ryoho) -->
     <section id="approach" class="py-16 md:py-20 lg:py-24">
         <div class="container-section">
-            <div class="max-w-3xl mx-auto text-center mb-12 md:mb-16">
+            <div class="max-w-3xl mx-auto text-center mb-12 md:mb-16 animate-on-scroll animate-on-scroll-init">
                 <h2 class="mb-4">なぜ根本改善に「連動性療法」なのか？</h2>
                 <p class="text-lg">
                     BACK AGINGの「連動性療法」は、一般的な鍼灸やマッサージのような対症療法とは異なり、<strong class="text-primary">痛みの根本原因にアプローチする運動療法</strong>です。
@@ -435,12 +654,12 @@
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-16 items-center mb-12 md:mb-16">
                 <!-- Image/Video Placeholder replaced with two stacked images -->
-                <div class="order-1 md:order-2 flex flex-col gap-4 md:gap-6">
+                <div class="order-1 md:order-2 flex flex-col gap-4 md:gap-6 animate-on-scroll animate-on-scroll-init">
                     <img src="images/sejutsu01.png" alt="施術風景 1" class="w-full h-40 md:h-48 object-cover rounded-xl shadow-lg" loading="lazy">
                     <img src="images/sejutsu02.png" alt="施術風景 2" class="w-full h-40 md:h-48 object-cover rounded-xl shadow-lg" loading="lazy">
                 </div>
                 <!-- Explanation & Reasons -->
-                <div class="order-2 md:order-1">
+                <div class="order-2 md:order-1 animate-on-scroll animate-on-scroll-init">
                     <h3 class="mb-4">連動性療法の特徴</h3>
                     <ul class="list-check mb-8">
                         <li><i data-lucide="check-circle-2"></i>痛みのある膝だけでなく、全身の連動性から原因を特定</li>
@@ -460,7 +679,7 @@
             </div>
 
              <!-- Founder's Message -->
-              <div class="bg-gradient-to-r from-teal-50 to-cyan-50 rounded-lg p-8 md:p-12 text-center">
+              <div class="bg-gradient-to-r from-teal-50 to-cyan-50 rounded-lg p-8 md:p-12 text-center animate-on-scroll animate-on-scroll-init">
                  <h3 class="mb-4">創業の想い</h3>
                  <p class="max-w-3xl mx-auto text-lg">
                      BACK AGINGの理念は、「人生100年時代を心身ともにイキイキと過ごせる人を増やす」こと。 高齢になっても自分の足で自由に動き、やりたいことを諦めない人生を実現するために生まれました。 痛みや不安で縮こまっていた心まで元気になる体験を、一人でも多くの方にお届けしたいと思っています。
@@ -469,46 +688,149 @@
         </div>
     </section>
 
+    <!-- Section 6: Case Studies (New Section) -->
+    <section id="case-studies" class="py-16 md:py-20 lg:py-24 bg-white"> <!-- 背景色は適宜変更 -->
+        <div class="container-section">
+            <h2 class="text-center mb-12 md:mb-16 animate-on-scroll animate-on-scroll-init">膝の痛みを改善されたお客さまの事例</h2>
+
+            <div class="space-y-16 md:space-y-20"> <!-- 各事例間のスペース -->
+
+                <!-- Case Study 1 -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12 items-start animate-on-scroll animate-on-scroll-init">
+                    <!-- Text Column (Desktop: order-1) -->
+                    <div class="flex flex-col md:order-1">
+                        <!-- Title (Mobile: order-1) -->
+                        <h3 class="text-2xl font-semibold text-text-dark mb-4 order-1">事例1：変形性膝関節症でお悩みの50代女性</h3>
+                        <!-- Descriptions (Mobile: order-3) -->
+                        <div class="order-3">
+                            <p class="text-text-default mb-4">
+                                <strong class="text-primary">【来店前の状況】</strong><br>
+                                左膝に痛みがあり、特に歩きはじめとしゃがむ動作で痛みを感じていた。日常的にランニングをしたりフィットネスクラブに通ったり、鍼灸、マッサージ、ストレッチを受けたものの、なかなか改善されない状況。
+                            </p>
+                            <p class="text-text-default">
+                                <strong class="text-primary">【改善内容】</strong><br>
+                                痛みでしゃがむことを拒んでいたが、施術スタートから約3ヶ月が経ったころには<span class="marker-yellow">日常生活の中で普通にしゃがめることが多くなった</span>。今後はより日常生活で膝に痛みを感じることなく生活できるようにすることを目指しつつ、<span class="marker-yellow">痛みのない状態でフルマラソンの完走にも挑戦しようと思えるようになった</span>。
+                            </p>
+                        </div>
+                        <!-- Image/Video (Mobile: order-2, Hidden on Desktop in this column) -->
+                        <div class="order-2 md:hidden">
+                            <div class="aspect-video bg-gray-200 rounded-lg shadow-md flex items-center justify-center text-gray-500 mt-4">
+                                 <img src="images/case1_ba.png" alt="事例1 Before/After">)
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Image Column (Desktop: order-2, Hidden on Mobile) -->
+                    <div class="hidden md:block md:order-2">
+                        <div class="aspect-video bg-gray-200 rounded-lg shadow-md flex items-center justify-center text-gray-500">
+                             <img src="images/case1_ba.png" alt="事例1 Before/After">)
+                        </div>
+                    </div>
+                </div>
+                <!-- /Case Study 1 -->
+
+                <!-- Case Study 2 -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12 items-start animate-on-scroll animate-on-scroll-init">
+                    <!-- Image Column (Desktop: order-1, Hidden on Mobile) -->
+                    <div class="hidden md:block md:order-1">
+                        <video id="case-study-video-2-desktop" src="videos/case2_ba.mp4" loop muted playsinline class="w-full aspect-video rounded-lg shadow-md"></video>
+                    </div>
+                    <!-- Text Column (Desktop: order-2) -->
+                    <div class="flex flex-col md:order-2">
+                        <!-- Title (Mobile: order-1) -->
+                        <h3 class="text-2xl font-semibold text-text-dark mb-4 order-1">事例2：膝痛でお悩みの60代男性</h3>
+                        <!-- Descriptions (Mobile: order-3) -->
+                        <div class="order-3">
+                            <p class="text-text-default mb-4">
+                                <strong class="text-primary">【来店前の状況】</strong><br>
+                                5.6年前から両足が重たくなり、病院に行ったところヘルニアと診断されたが当時はまだ症状がひどくなかった。ところが、急に歩くのがしんどくなり、なんとか歩けるようになるまで回復するものの、左膝が痛くサポーターをつけている。右足指に痺れがあり、強いガニ股になっている。
+                            </p>
+                            <p class="text-text-default">
+                                <strong class="text-primary">【改善内容】</strong><br>
+                                施術スタートしてから約6ヶ月経ったころには、周りから歩き方が変わってると言われ始めるように。順調に速く歩けるようになっていき、今では<span class="marker-yellow">トレッドミル上で走れるようほどにまで改善</span>した。<span class="marker-yellow">早歩き（人を抜かせるぐらい）、階段を1段飛ばしで歩けるようにもなった。</span>
+                            </p>
+                        </div>
+                        <!-- Image/Video (Mobile: order-2, Hidden on Desktop in this column) -->
+                        <div class="order-2 md:hidden">
+                            <video id="case-study-video-2-mobile" src="videos/case2_ba.mp4" loop muted playsinline class="w-full aspect-video rounded-lg shadow-md mt-4"></video>
+                        </div>
+                    </div>
+                </div>
+                <!-- /Case Study 2 -->
+
+                <!-- Case Study 3 (Commented Out)
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12 items-start">
+                    
+                    <div class="flex flex-col md:order-1">
+                        
+                        <h3 class="text-2xl font-semibold text-text-dark mb-4 order-1">事例3：スポーツ復帰を目指す50代女性</h3>
+                        
+                        <div class="order-3">
+                            <p class="text-text-default mb-4">
+                                <strong class="text-primary">【来店前の状況】</strong><br>
+                                ここに仮のテキストが入ります。〇〇さんの来店前の具体的な状況を説明します。
+                            </p>
+                            <p class="text-text-default">
+                                <strong class="text-primary">【改善内容】</strong><br>
+                                ここに仮のテキストが入ります。BACK AGINGでの施術やトレーニングによって、どのように症状が改善したかを具体的に説明します。
+                            </p>
+                        </div>
+                        
+                        <div class="order-2 md:hidden">
+                            <video id="case-study-video-3-mobile" src="videos/case3_ba.mp4" loop muted playsinline class="w-full aspect-video rounded-lg shadow-md mt-4"></video>
+                        </div>
+                    </div>
+                    
+                    <div class="hidden md:block md:order-2">
+                        <video id="case-study-video-3-desktop" src="videos/case3_ba.mp4" loop muted playsinline class="w-full aspect-video rounded-lg shadow-md"></video>
+                    </div>
+                </div>
+                 
+                 -->
+
+            </div>
+        </div>
+    </section>
+
     <!-- Section 6: Testimonials -->
     <section id="testimonials" class="py-16 md:py-20 lg:py-24 bg-secondary">
         <div class="container-section">
-            <h2 class="text-center mb-12 md:mb-16">BACK AGINGをご利用いただいたお客様の声</h2>
+            <h2 class="text-center mb-12 md:mb-16 animate-on-scroll animate-on-scroll-init">他にも大勢のお客さまから「改善した！」という声をいただいております</h2>
              <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                 <div class="testimonial-card">
+                 <div class="testimonial-card animate-on-scroll animate-on-scroll-init">
                      <p class="quote">ランニング中に膝の痛みがあり、和田さんのインスタを見て無料相談を申し込みました。膝の痛みの相談でしたが、足首の硬さが原因と指摘され、驚きました。セッションごとに体の動きが改善され、マラソン大会でも不安なく挑め、自己ベストを更新できました。</p>
-                     <p class="author">- のぶ様 (ランニング愛好家)</p>
+                     <p class="author"> のぶ様 (ランニング愛好家)</p>
                  </div>
-                  <div class="testimonial-card">
+                  <div class="testimonial-card animate-on-scroll animate-on-scroll-init">
                      <p class="quote">フルマラソンで膝の痛みに悩んでいましたが、セッションを受けて1年、上半身と下半身の連動性が向上し、痛みが出にくくなりました。今年のフルマラソン後も、膝の回復がこれまでで一番早かったです。</p>
-                     <p class="author">- Akiko (Aki) 様 (マラソンランナー)</p>
+                     <p class="author"> Akiko (Aki) 様 (マラソンランナー)</p>
                  </div>
-                 <div class="testimonial-card">
+                 <div class="testimonial-card animate-on-scroll animate-on-scroll-init">
                      <p class="quote">フルマラソンを目指してランニングを始めましたが、膝の痛みに悩まされていました。BACK AGINGを訪れ、1回目のセッションで歩く感覚が変わり、以降、体の連動性の重要性を実感し、膝の痛みもなくなりました。</p>
-                     <p class="author">- ksi dsk 様 (ランニング愛好家)</p>
+                     <p class="author"> ksi dsk 様 (ランニング愛好家)</p>
                  </div>
-                 <div class="testimonial-card">
+                 <div class="testimonial-card animate-on-scroll animate-on-scroll-init">
                      <p class="quote">膝の痛みで通い始めましたが、調整をしていただき、長時間歩いても痛みが出なくなりました。</p>
-                     <p class="author">- 重田優美子 様</p>
+                     <p class="author"> 重田 様</p>
                  </div>
-                  <div class="testimonial-card">
+                  <div class="testimonial-card animate-on-scroll animate-on-scroll-init">
                       <p class="quote">マラソン中の膝の痛みに悩んでいましたが、和田さんから連動性トレーニングを教えていただき、膝の痛みなく走れるようになりました。体の使い方でこんなに違うとは驚きです。</p>
-                      <p class="author">- k Y 様 (マラソンランナー)</p>
+                      <p class="author"> k Y 様 (マラソンランナー)</p>
                   </div>
-                  <div class="testimonial-card">
+                  <div class="testimonial-card animate-on-scroll animate-on-scroll-init">
                      <p class="quote">右膝の痛みと左膝半月板手術後、リハビリランがうまくいかず、マラソン復帰は無理かと思っていましたが、BACK AGINGでの連動性トレーニングにより、痛みを感じずにパフォーマンスを取り戻せました。</p>
-                     <p class="author">- Tomotaro Murata 様 (マラソンランナー)</p>
+                     <p class="author"> Tomotaro Murata 様 (マラソンランナー)</p>
                  </div>
-                 <div class="testimonial-card">
+                 <div class="testimonial-card animate-on-scroll animate-on-scroll-init">
                      <p class="quote">ランナー膝の治療をきっかけに通い始め、5キロ走るだけで激痛だったのが、100キロマラソン完走、フルマラソンで自己ベストを1時間更新できました。痛みの根本原因にフォーカスする治療の効果は素晴らしいです。</p>
-                     <p class="author">- 岸本勝也 様 (マラソンランナー)</p>
+                     <p class="author"> 岸本 様 (マラソンランナー)</p>
                  </div>
-                 <div class="testimonial-card">
+                 <div class="testimonial-card animate-on-scroll animate-on-scroll-init">
                      <p class="quote">膝が痛くて歩けず、整形外科での治療も効果がありませんでしたが、BACK AGINGでのわずかな動きを毎日続けた結果、体が軽く動けるようになりました。</p>
-                     <p class="author">- 小林朋子 様</p>
+                     <p class="author"> 小林 様</p>
                  </div>
-                 <div class="testimonial-card">
+                 <div class="testimonial-card animate-on-scroll animate-on-scroll-init">
                       <p class="quote">椎間板ヘルニアで走れなくなり、マラソン大会も諦めていましたが、BACK AGINGに通い始め、トレーナーの指導で悪い動きを修正し、練習を再開できました。</p>
-                      <p class="author">- z34 kk 様 (マラソン愛好家)</p>
+                      <p class="author"> z34 kk 様 (マラソン愛好家)</p>
                  </div>
              </div>
         </div>
@@ -517,30 +839,30 @@
      <!-- Section 7: Session Flow -->
      <section id="flow" class="py-16 md:py-20 lg:py-24">
          <div class="container-section">
-             <h2 class="text-center mb-12 md:mb-16">初回治療セッションの流れ</h2>
+             <h2 class="text-center mb-12 md:mb-16 animate-on-scroll animate-on-scroll-init">初回治療セッションの流れ</h2>
              <div class="max-w-2xl mx-auto">
                   <!-- Step items - Icon bg and line color now Teal -->
-                 <div class="step-item">
+                 <div class="step-item animate-on-scroll animate-on-scroll-init">
                      <div class="icon-wrapper">1</div>
                      <h4>STEP 1：カウンセリング</h4>
                      <p>事前問診票をもとに、トレーナーが詳しくお話を伺います。現状のお身体の悩みや目標を丁寧に把握し、擦り合わせていきます。</p>
                  </div>
-                 <div class="step-item">
+                 <div class="step-item animate-on-scroll animate-on-scroll-init">
                       <div class="icon-wrapper">2</div>
                      <h4>STEP 2：動作分析・方針提案</h4>
                      <p>実際にお身体を動かす検査を行います。痛みの出ない範囲で動かすのでご安心ください。カウンセリングと動作分析の結果をもとに、最適なプログラムを作成・ご提案します。</p>
                  </div>
-                 <div class="step-item">
+                 <div class="step-item animate-on-scroll animate-on-scroll-init">
                       <div class="icon-wrapper">3</div>
                      <h4>STEP 3：連動性療法の実践</h4>
                      <p>実際に連動性療法を用いて、痛みの改善に取り組みます。これまで正しく動いていなかった筋肉を、トレーナーと一緒に協力して動かしていきます。痛みを伴う施術はありません。</p>
                  </div>
-                 <div class="step-item">
+                 <div class="step-item animate-on-scroll animate-on-scroll-init">
                       <div class="icon-wrapper">4</div>
                      <h4>STEP 4：セルフケア指導・今後</h4>
                      <p>本日のセッションを踏まえ、ご自宅でできる最適なセルフトレーニングメニューをご提案します。復習用の動画も個別に送付。LINEでの個別サポート（クラブ会員特典）もご案内します。</p>
                  </div>
-                   <div class="mt-12 text-center bg-teal-50 p-6 rounded-lg border border-teal-200">
+                   <div class="mt-12 text-center bg-teal-50 p-6 rounded-lg border border-teal-200 animate-on-scroll animate-on-scroll-init">
                      <p class="font-semibold text-lg text-text-dark mb-2"><i data-lucide="info" class="inline w-5 h-5 mr-1"></i> ご来店の際のお願い</p>
                      <p>特別なご用意は必要ありません。動きやすい服装（Tシャツ、ジャージなど）をご準備ください。<br>ご予約時間の10分前を目安にお越しください。</p>
                  </div>
@@ -549,8 +871,12 @@
      </section>
 
     <!-- Section 8: Offer + CTA -->
-     <section id="offer" class="py-16 md:py-20 lg:py-24 bg-gradient-to-r from-primary to-teal-700 text-white">
-        <div class="container-section text-center">
+     <section id="offer" class="relative py-16 md:py-20 lg:py-24 text-white"
+              style="background-image: url('images/offer-background.png'); background-size: cover; background-position: center;">
+        <!-- Overlay -->
+        <div class="absolute inset-0 bg-primary opacity-70" style="background-color: rgba(13, 148, 136, 0.7); z-index: 1;"></div>
+        <!-- Content -->
+        <div class="container-section text-center relative z-10 animate-on-scroll animate-on-scroll-init">
             <h2 class="text-white mb-6">膝の痛みがあったことすら忘れる日々へ</h2>
               <p class="text-xl md:text-2xl text-teal-100 mb-8 max-w-3xl mx-auto">
                 まずは本当の原因を一緒に見つけませんか？<br>
@@ -562,7 +888,7 @@
             </a>
             <p class="mb-8">
                   <a href="tel:070-9298-1284" class="tel-link text-white hover:text-teal-200 text-xl font-semibold inline-flex items-center gap-2">
-                    <i data-lucide="phone-call" class="w-5 h-5"></i>
+                    <i data-lucide="phone" class="w-5 h-5"></i>
                     <span>070-9298-1284 でも予約受付中</span>
                 </a>
             </p>
@@ -580,60 +906,348 @@
     <!-- Section 9: FAQ -->
     <section id="faq" class="py-16 md:py-20 lg:py-24">
         <div class="container-section">
-            <h2 class="text-center mb-12 md:mb-16">よくあるご質問</h2>
-            <div class="max-w-3xl mx-auto">
-                <div x-data="{ open: false }" class="faq-item">
-                    <div @click="open = !open" class="faq-question">
-                        <h4 :class="{ 'text-primary': open }">どんな服装で行けばいいですか？持ち物は？</h4>
-                        <i data-lucide="chevron-down" class="w-6 h-6 transition-transform duration-300" :class="{ 'rotate-180 text-primary': open }"></i>
-                    </div>
-                    <div x-show="open" x-collapse class="faq-answer">
-                        <p>Tシャツやジャージ、スウェットなど、動きやすい服装でお越しください。お着替えスペースもご用意しております。特に必要な持ち物はございませんが、汗をかきやすい方はタオルなどをお持ちください。</p>
-                    </div>
+            <h2 class="text-center mb-12 md:mb-16 animate-on-scroll animate-on-scroll-init">よくあるご質問</h2>
+            <div x-data="{ activeTab: 1 }" class="max-w-3xl mx-auto">
+                <!-- Tabs -->
+                <div class="mb-8 border-b border-gray-200 animate-on-scroll animate-on-scroll-init">
+                    <nav class="-mb-px flex space-x-6 overflow-x-auto" aria-label="Tabs">
+                        <button @click="activeTab = 1" :class="{ 'border-primary text-primary': activeTab === 1, 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300': activeTab !== 1 }" class="whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm">
+                            症状関連
+                        </button>
+                        <button @click="activeTab = 2" :class="{ 'border-primary text-primary': activeTab === 2, 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300': activeTab !== 2 }" class="whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm">
+                            サービス全般
+                        </button>
+                        <button @click="activeTab = 3" :class="{ 'border-primary text-primary': activeTab === 3, 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300': activeTab !== 3 }" class="whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm">
+                            治療・トレーニング
+                        </button>
+                        <button @click="activeTab = 4" :class="{ 'border-primary text-primary': activeTab === 4, 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300': activeTab !== 4 }" class="whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm">
+                            ご来店時
+                        </button>
+                        <button @click="activeTab = 5" :class="{ 'border-primary text-primary': activeTab === 5, 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300': activeTab !== 5 }" class="whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm">
+                            ご予約・お支払い
+                        </button>
+                    </nav>
                 </div>
-                 <div x-data="{ open: false }" class="faq-item">
-                     <div @click="open = !open" class="faq-question">
-                         <h4 :class="{ 'text-primary': open }">治療は痛いですか？ボキボキしますか？</h4>
-                         <i data-lucide="chevron-down" class="w-6 h-6 transition-transform duration-300" :class="{ 'rotate-180 text-primary': open }"></i>
-                     </div>
-                     <div x-show="open" x-collapse class="faq-answer">
-                         <p>いいえ、BACK AGINGの連動性療法は、痛みを伴う施術や、関節をボキボキ鳴らすような手技は行いません。身体の連動性を高めるための、無理のない範囲での運動療法が中心となります。痛みを感じる場合はすぐにお知らせください。</p>
-                     </div>
-                 </div>
-                  <div x-data="{ open: false }" class="faq-item">
-                     <div @click="open = !open" class="faq-question">
-                         <h4 :class="{ 'text-primary': open }">どのくらいの頻度で通えばいいですか？</h4>
-                         <i data-lucide="chevron-down" class="w-6 h-6 transition-transform duration-300" :class="{ 'rotate-180 text-primary': open }"></i>
-                     </div>
-                     <div x-show="open" x-collapse class="faq-answer">
-                         <p>お客様のお身体の状態や目標によって異なります。初回体験時に状態を詳しく評価させていただき、最適な通院頻度やプランをご提案させていただきます。最初は週1回程度から始め、改善に合わせて頻度を調整していくケースが多いです。</p>
-                     </div>
-                 </div>
-                  <div x-data="{ open: false }" class="faq-item">
-                     <div @click="open = !open" class="faq-question">
-                         <h4 :class="{ 'text-primary': open }">健康保険は使えますか？</h4>
-                         <i data-lucide="chevron-down" class="w-6 h-6 transition-transform duration-300" :class="{ 'rotate-180 text-primary': open }"></i>
-                     </div>
-                     <div x-show="open" x-collapse class="faq-answer">
-                         <p>申し訳ございませんが、健康保険は適用外となります。BACK AGINGは自由診療のパーソナルトレーニング施設です。</p>
-                     </div>
-                 </div>
-                  <div x-data="{ open: false }" class="faq-item">
-                     <div @click="open = !open" class="faq-question">
-                         <h4 :class="{ 'text-primary': open }">クレジットカードは使えますか？</h4>
-                         <i data-lucide="chevron-down" class="w-6 h-6 transition-transform duration-300" :class="{ 'rotate-180 text-primary': open }"></i>
-                     </div>
-                     <div x-show="open" x-collapse class="faq-answer">
-                         <p>はい、ご利用いただけます。現金以外に、主要なクレジットカード（VISA, Master, Amex）、交通系IC、iD、QUICPay、PayPayなど、各種キャッシュレス決済に対応しております。</p>
-                     </div>
-                 </div>
+
+                <!-- Tab Panels -->
+                <div class="animate-on-scroll animate-on-scroll-init">
+                    <!-- Panel 5: 症状関連 (Moved to first position, activeTab = 1) -->
+                    <div x-show="activeTab === 1" x-transition class="space-y-5">
+                        <!-- Q1 -->
+                        <div x-data="{ open: false }" class="faq-item !py-0 !border-b-0">
+                            <div @click="open = !open" class="faq-question py-5 border-b border-gray-200">
+                                <h4 :class="{ 'text-primary': open }">Q: 膝に水が溜まっています。施術できますか？</h4>
+                                <i data-lucide="chevron-down" class="w-6 h-6 transition-transform duration-300 flex-shrink-0" :class="{ 'rotate-180 text-primary': open }"></i>
+                            </div>
+                            <div x-show="open" x-collapse class="faq-answer pb-5 border-b border-gray-200">
+                                <p>A: 状態にもよりますが、医師に運動禁止などの制限を掛けられていなければ可能です。 水腫は炎症反応であるため、水を抜くだけでは根本改善になりません。炎症の原因となる関節へのストレスを軽減するアプローチを行います。</p>
+                            </div>
+                        </div>
+                        <!-- Q2 -->
+                        <div x-data="{ open: false }" class="faq-item !py-0 !border-b-0">
+                            <div @click="open = !open" class="faq-question py-5 border-b border-gray-200">
+                                <h4 :class="{ 'text-primary': open }">Q: 変形性膝関節症と診断されましたが手術を避けられますか？</h4>
+                                <i data-lucide="chevron-down" class="w-6 h-6 transition-transform duration-300 flex-shrink-0" :class="{ 'rotate-180 text-primary': open }"></i>
+                            </div>
+                            <div x-show="open" x-collapse class="faq-answer pb-5 border-b border-gray-200">
+                                <p>A: 変形の程度によります。重度になるほど難易度は上がりますが、過去大きな改善が見られ手術を回避した事例もございます。BACK AGINGのアプローチを一定期間行なった後に、痛みが軽減するようであれば、手術回避の可能性もあると考えられます。</p>
+                            </div>
+                        </div>
+                        <!-- Q3 -->
+                        <div x-data="{ open: false }" class="faq-item !py-0 !border-b-0">
+                            <div @click="open = !open" class="faq-question py-5 border-b border-gray-200">
+                                <h4 :class="{ 'text-primary': open }">Q: ヒアルロン酸注射や湿布だけでは良くならなかったのですが…</h4>
+                                <i data-lucide="chevron-down" class="w-6 h-6 transition-transform duration-300 flex-shrink-0" :class="{ 'rotate-180 text-primary': open }"></i>
+                            </div>
+                            <div x-show="open" x-collapse class="faq-answer pb-5 border-b border-gray-200">
+                                <p>A: 注射は一時的な潤滑改善であり、湿布や痛み止めは、対処療法であると言えます。痛みの背景にある"身体の動き"を修正しなければ根本的な解決にはなり得ないと思います。BACK AGINGでは、身体の動かし方の改善にフォーカスします。</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Panel 1: サービス全般 (Now activeTab = 2) -->
+                    <div x-show="activeTab === 2" x-transition class="space-y-5">
+                        <div x-data="{ open: false }" class="faq-item !py-0 !border-b-0">
+                            <div @click="open = !open" class="faq-question py-5 border-b border-gray-200">
+                                <h4 :class="{ 'text-primary': open }">Q: BACK AGINGのサービス内容を教えてください。</h4>
+                                <i data-lucide="chevron-down" class="w-6 h-6 transition-transform duration-300 flex-shrink-0" :class="{ 'rotate-180 text-primary': open }"></i>
+                            </div>
+                            <div x-show="open" x-collapse class="faq-answer pb-5 border-b border-gray-200">
+                                <p>A: BACK AGINGは、「連動性療法」に基づいたパーソナルトレーニングと治療を提供しています。従来の整体、マッサージやストレッチ等とは異なり、全身の筋肉や関節の連動性を高めることで、慢性的な腰痛や肩こり、スポーツ障害などを根本から改善に導きます。</p>
+                            </div>
+                        </div>
+                        <div x-data="{ open: false }" class="faq-item !py-0 !border-b-0">
+                            <div @click="open = !open" class="faq-question py-5 border-b border-gray-200">
+                                <h4 :class="{ 'text-primary': open }">Q: 連動性療法とは何ですか？</h4>
+                                <i data-lucide="chevron-down" class="w-6 h-6 transition-transform duration-300 flex-shrink-0" :class="{ 'rotate-180 text-primary': open }"></i>
+                            </div>
+                            <div x-show="open" x-collapse class="faq-answer pb-5 border-b border-gray-200">
+                                <p>A: 連動性療法とは、人間の体は本来、複数の筋肉や関節が連動して動くという特性に着目し、その機能を向上させることで様々な不調を改善するアプローチです。従来の部分的な治療法とは異なり、身体全体を一つのシステムとして捉え、根本的な原因にアプローチします。</p>
+                            </div>
+                        </div>
+                         <div x-data="{ open: false }" class="faq-item !py-0 !border-b-0">
+                            <div @click="open = !open" class="faq-question py-5 border-b border-gray-200">
+                                <h4 :class="{ 'text-primary': open }">Q: 従来の治療法と何が違うのですか？</h4>
+                                <i data-lucide="chevron-down" class="w-6 h-6 transition-transform duration-300 flex-shrink-0" :class="{ 'rotate-180 text-primary': open }"></i>
+                            </div>
+                            <div x-show="open" x-collapse class="faq-answer pb-5 border-b border-gray-200">
+                                <p>A: 従来の腰痛治療などは、痛みのある部分にマッサージや電気治療などを施す対症療法が一般的でした。しかし、このような方法は一時的な効果にとどまりやすく、根本的な解決には繋がらないことが多いのも実情です。BACK AGINGでは、全身の連動性を評価し、動きのクセや歪みを根本から改善していくため、再発しにくい体づくりを目指せます。</p>
+                            </div>
+                        </div>
+                        <div x-data="{ open: false }" class="faq-item !py-0 !border-b-0">
+                            <div @click="open = !open" class="faq-question py-5 border-b border-gray-200">
+                                <h4 :class="{ 'text-primary': open }">Q: 具体的にどのような効果が期待できますか？</h4>
+                                <i data-lucide="chevron-down" class="w-6 h-6 transition-transform duration-300 flex-shrink-0" :class="{ 'rotate-180 text-primary': open }"></i>
+                            </div>
+                            <div x-show="open" x-collapse class="faq-answer pb-5 border-b border-gray-200">
+                                 <ul class="list-disc list-inside space-y-1">
+                                    <li>慢性的な腰痛、肩こり、膝痛等の改善</li>
+                                    <li>スポーツパフォーマンスの向上</li>
+                                    <li>猫背や姿勢の改善</li>
+                                    <li>怪我の予防</li>
+                                    <li>体の柔軟性の向上</li>
+                                    <li>血流促進効果</li>
+                                    <li>全身のバランス調整</li>
+                                </ul>
+                                 <p class="mt-2">効果には個人差がありますが、多くの方が施術後すぐに体の変化を実感されています。</p>
+                            </div>
+                        </div>
+                        <div x-data="{ open: false }" class="faq-item !py-0 !border-b-0">
+                            <div @click="open = !open" class="faq-question py-5 border-b border-gray-200">
+                                <h4 :class="{ 'text-primary': open }">Q: どのような人がBACK AGINGのサービスを受けるべきですか？</h4>
+                                <i data-lucide="chevron-down" class="w-6 h-6 transition-transform duration-300 flex-shrink-0" :class="{ 'rotate-180 text-primary': open }"></i>
+                            </div>
+                            <div x-show="open" x-collapse class="faq-answer pb-5 border-b border-gray-200">
+                                 <ul class="list-disc list-inside space-y-1">
+                                    <li>長年、腰痛や肩こりに悩まされている方</li>
+                                    <li>様々な治療を試したが効果が実感できなかった方</li>
+                                    <li>スポーツのパフォーマンスを向上させたい方</li>
+                                    <li>怪我をしにくい体作りをしたい方</li>
+                                    <li>体の柔軟性を高めたい方</li>
+                                    <li>全身のバランスを整えたい方</li>
+                                </ul>
+                                <p class="mt-2">上記のような方だけでなく、お身体の状態についてお困りごとがある方、不安がある方は、ぜひ公式LINEからご相談ください。</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Panel 2: 治療・トレーニング (Now activeTab = 3) -->
+                    <div x-show="activeTab === 3" x-transition class="space-y-5">
+                        <div x-data="{ open: false }" class="faq-item !py-0 !border-b-0">
+                            <div @click="open = !open" class="faq-question py-5 border-b border-gray-200">
+                                <h4 :class="{ 'text-primary': open }">Q: 他の治療院や整体・マッサージ等との違いはなんですか？</h4>
+                                <i data-lucide="chevron-down" class="w-6 h-6 transition-transform duration-300 flex-shrink-0" :class="{ 'rotate-180 text-primary': open }"></i>
+                            </div>
+                            <div x-show="open" x-collapse class="faq-answer pb-5 border-b border-gray-200">
+                                <p>A: 当店では、痛みの治療のみならず、痛みの原因となった動きそのものを改善させることを目的としております。近年WHOが推奨する科学的根拠の強い治療法として「運動療法」が注目されていますが、痛みがある初期段階から可能な動きをどんどん行なっていき、ご自宅でも実施しやすい運動メニューを処方いたします。</p>
+                            </div>
+                        </div>
+                         <div x-data="{ open: false }" class="faq-item !py-0 !border-b-0">
+                            <div @click="open = !open" class="faq-question py-5 border-b border-gray-200">
+                                <h4 :class="{ 'text-primary': open }">Q: 他のパーソナルトレーニングやフィットネスとの違いはなんですか？</h4>
+                                <i data-lucide="chevron-down" class="w-6 h-6 transition-transform duration-300 flex-shrink-0" :class="{ 'rotate-180 text-primary': open }"></i>
+                            </div>
+                            <div x-show="open" x-collapse class="faq-answer pb-5 border-b border-gray-200">
+                                <p>A: 一般的なパーソナルトレーニングは筋力強化やダイエットといったいわゆる"体づくり"を主目的としているところが多いです。当店ではそういった体づくりの前に、我々現代人が大人になるに従って使えなくなった筋肉を使えるように刺激し、人間が本来兼ね備えた「連動性」を高めるところからトレーニングをスタートしていきます。その後は個々人の目的にわせて筋力の強化や、専門性の高い動きの習得にとりかかっていきます。そのため、「筋力はついたけど動きが鈍くなった」「、ダイエットには成功したけどなんだか疲れやすい」といったことが極めて起こりにくく、より健康的で機能的な体が手に入ります。</p>
+                            </div>
+                        </div>
+                        <div x-data="{ open: false }" class="faq-item !py-0 !border-b-0">
+                            <div @click="open = !open" class="faq-question py-5 border-b border-gray-200">
+                                <h4 :class="{ 'text-primary': open }">Q: 運動が苦手なので不安です</h4>
+                                <i data-lucide="chevron-down" class="w-6 h-6 transition-transform duration-300 flex-shrink-0" :class="{ 'rotate-180 text-primary': open }"></i>
+                            </div>
+                            <div x-show="open" x-collapse class="faq-answer pb-5 border-b border-gray-200">
+                                <p>A: BACK AGINGではきついトレーニングをいきなり行うことはありません。お一人お一人の状態を見た上で、必要な治療・トレーニングを適切な負荷と量で処方及びご提案しますのでご安心ください。</p>
+                            </div>
+                        </div>
+                        <div x-data="{ open: false }" class="faq-item !py-0 !border-b-0">
+                            <div @click="open = !open" class="faq-question py-5 border-b border-gray-200">
+                                <h4 :class="{ 'text-primary': open }">Q: どんな施術をしているのですか？痛くないですか？</h4>
+                                <i data-lucide="chevron-down" class="w-6 h-6 transition-transform duration-300 flex-shrink-0" :class="{ 'rotate-180 text-primary': open }"></i>
+                            </div>
+                            <div x-show="open" x-collapse class="faq-answer pb-5 border-b border-gray-200">
+                                <p>A: 痛みのある部分ではなく全身の動作を評価分析し、問題のある動作改善を行います。できるだけ痛みの出ない範囲で治療していきますのでご安心ください。</p>
+                            </div>
+                        </div>
+                         <div x-data="{ open: false }" class="faq-item !py-0 !border-b-0">
+                            <div @click="open = !open" class="faq-question py-5 border-b border-gray-200">
+                                <h4 :class="{ 'text-primary': open }">Q: 病院に通院中でも大丈夫ですか？</h4>
+                                <i data-lucide="chevron-down" class="w-6 h-6 transition-transform duration-300 flex-shrink-0" :class="{ 'rotate-180 text-primary': open }"></i>
+                            </div>
+                            <div x-show="open" x-collapse class="faq-answer pb-5 border-b border-gray-200">
+                                <p>A: 通院されている症状によってサービスをお受けすることが可能かどうかが異なります。明らかに安静を有するもの、内科的なトラブルで専門的な処置が必要なのものといった場合は必ず事前に担当の医師にご相談ください。また、判断に迷われる場合は合わせて当店まで事前にご連絡ください。</p>
+                            </div>
+                        </div>
+                        <div x-data="{ open: false }" class="faq-item !py-0 !border-b-0">
+                            <div @click="open = !open" class="faq-question py-5 border-b border-gray-200">
+                                <h4 :class="{ 'text-primary': open }">Q: 高齢でも受けられますか？</h4>
+                                <i data-lucide="chevron-down" class="w-6 h-6 transition-transform duration-300 flex-shrink-0" :class="{ 'rotate-180 text-primary': open }"></i>
+                            </div>
+                            <div x-show="open" x-collapse class="faq-answer pb-5 border-b border-gray-200">
+                                <p>A: 80代の方で歩行器ありでしか歩けなかった方が、歩行器なしで歩けるまで回復した事例もございます。</p>
+                            </div>
+                        </div>
+                        <div x-data="{ open: false }" class="faq-item !py-0 !border-b-0">
+                            <div @click="open = !open" class="faq-question py-5 border-b border-gray-200">
+                                <h4 :class="{ 'text-primary': open }">Q: おすすめの来店頻度はありますか？</h4>
+                                <i data-lucide="chevron-down" class="w-6 h-6 transition-transform duration-300 flex-shrink-0" :class="{ 'rotate-180 text-primary': open }"></i>
+                            </div>
+                            <div x-show="open" x-collapse class="faq-answer pb-5 border-b border-gray-200">
+                                <p>A: ご来店の初期は体の使い方を根本的に変えていくために、1週間〜2週間に1度（月4もしくは月2）のご来店がおすすめです。症状が安定してきたり、動きの改善が見られてきた段階でご来店の頻度を下げていき、最終的に痛みが出にくい（出ない）体を目指していきます。また、トレーニングをご自宅で行うのが難しいという方は、週に1度定期的に通っていただき、しっかりBACK AGING内でトレーニングを行なっていただくというご利用方法もできます。</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Panel 3: ご来店時 (Now activeTab = 4) -->
+                    <div x-show="activeTab === 4" x-transition class="space-y-5">
+                         <div x-data="{ open: false }" class="faq-item !py-0 !border-b-0">
+                            <div @click="open = !open" class="faq-question py-5 border-b border-gray-200">
+                                <h4 :class="{ 'text-primary': open }">Q: 持ち物はありますか？また、どのような服装でいったらよいでしょうか？</h4>
+                                <i data-lucide="chevron-down" class="w-6 h-6 transition-transform duration-300 flex-shrink-0" :class="{ 'rotate-180 text-primary': open }"></i>
+                            </div>
+                            <div x-show="open" x-collapse class="faq-answer pb-5 border-b border-gray-200">
+                                <p>A: 検査、治療及びトレーニングなどを行うためできるだけ動きやすい服装をご準備ください。お着替えのスペースもございます。</p>
+                            </div>
+                        </div>
+                        <div x-data="{ open: false }" class="faq-item !py-0 !border-b-0">
+                            <div @click="open = !open" class="faq-question py-5 border-b border-gray-200">
+                                <h4 :class="{ 'text-primary': open }">Q: 最寄りの駅はどこですか？</h4>
+                                <i data-lucide="chevron-down" class="w-6 h-6 transition-transform duration-300 flex-shrink-0" :class="{ 'rotate-180 text-primary': open }"></i>
+                            </div>
+                            <div x-show="open" x-collapse class="faq-answer pb-5 border-b border-gray-200">
+                                <p>A: 江ノ島電鉄 由比ヶ浜駅から徒歩3分<br>JR鎌倉駅からは徒歩17分です。</p>
+                            </div>
+                        </div>
+                         <div x-data="{ open: false }" class="faq-item !py-0 !border-b-0">
+                            <div @click="open = !open" class="faq-question py-5 border-b border-gray-200">
+                                <h4 :class="{ 'text-primary': open }">Q: 車で行こうと思っているのですが駐車場はありますか？</h4>
+                                <i data-lucide="chevron-down" class="w-6 h-6 transition-transform duration-300 flex-shrink-0" :class="{ 'rotate-180 text-primary': open }"></i>
+                            </div>
+                            <div x-show="open" x-collapse class="faq-answer pb-5 border-b border-gray-200">
+                                <p>A: 駐車場はございません。最寄りのコインパーキングをご利用ください。</p>
+                            </div>
+                        </div>
+                         <div x-data="{ open: false }" class="faq-item !py-0 !border-b-0">
+                            <div @click="open = !open" class="faq-question py-5 border-b border-gray-200">
+                                <h4 :class="{ 'text-primary': open }">Q: 更衣室・シャワー・ロッカーはありますか？</h4>
+                                <i data-lucide="chevron-down" class="w-6 h-6 transition-transform duration-300 flex-shrink-0" :class="{ 'rotate-180 text-primary': open }"></i>
+                            </div>
+                            <div x-show="open" x-collapse class="faq-answer pb-5 border-b border-gray-200">
+                                <p>A: お着替え用のスペースがありますが、シャワー、ロッカーといった設備はございません。</p>
+                            </div>
+                        </div>
+                         <div x-data="{ open: false }" class="faq-item !py-0 !border-b-0">
+                            <div @click="open = !open" class="faq-question py-5 border-b border-gray-200">
+                                <h4 :class="{ 'text-primary': open }">Q: 土足での利用は可能ですか？</h4>
+                                <i data-lucide="chevron-down" class="w-6 h-6 transition-transform duration-300 flex-shrink-0" :class="{ 'rotate-180 text-primary': open }"></i>
+                            </div>
+                            <div x-show="open" x-collapse class="faq-answer pb-5 border-b border-gray-200">
+                                <p>A: 玄関で靴を脱いでいただき、店内は土足厳禁となっております。内履き等のご用意も必要ありません。</p>
+                            </div>
+                        </div>
+                         <div x-data="{ open: false }" class="faq-item !py-0 !border-b-0">
+                            <div @click="open = !open" class="faq-question py-5 border-b border-gray-200">
+                                <h4 :class="{ 'text-primary': open }">Q: お店が見つかりません。お店の住所の場所に行ったら普通の家があるのですが、ここであってますか？</h4>
+                                <i data-lucide="chevron-down" class="w-6 h-6 transition-transform duration-300 flex-shrink-0" :class="{ 'rotate-180 text-primary': open }"></i>
+                            </div>
+                            <div x-show="open" x-collapse class="faq-answer pb-5 border-b border-gray-200">
+                                <p>A: はい、あっていると思います。外観は一見普通の民家です。カスタード色の壁の家です。<br>表札に、「BACK AGING」と運営会社である「株式会社ウィルフォワード」と表記があります。</p>
+                            </div>
+                        </div>
+                         <div x-data="{ open: false }" class="faq-item !py-0 !border-b-0">
+                            <div @click="open = !open" class="faq-question py-5 border-b border-gray-200">
+                                <h4 :class="{ 'text-primary': open }">Q: 予約時間の何分前に来店すればいいですか？</h4>
+                                <i data-lucide="chevron-down" class="w-6 h-6 transition-transform duration-300 flex-shrink-0" :class="{ 'rotate-180 text-primary': open }"></i>
+                            </div>
+                            <div x-show="open" x-collapse class="faq-answer pb-5 border-b border-gray-200">
+                                <p>A: ご予約の10分前より来店可能となっております。前の方がセッションをお受けになっていることがありますので、それより早いご来店はお控えください。</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Panel 4: ご予約・お支払い (Now activeTab = 5) -->
+                    <div x-show="activeTab === 5" x-transition class="space-y-5">
+                        <div x-data="{ open: false }" class="faq-item !py-0 !border-b-0">
+                            <div @click="open = !open" class="faq-question py-5 border-b border-gray-200">
+                                <h4 :class="{ 'text-primary': open }">Q: 予約は必要ですか？直前の予約はできますか？</h4>
+                                <i data-lucide="chevron-down" class="w-6 h-6 transition-transform duration-300 flex-shrink-0" :class="{ 'rotate-180 text-primary': open }"></i>
+                             </div>
+                             <div x-show="open" x-collapse class="faq-answer pb-5 border-b border-gray-200">
+                                <p>A: 完全予約制となっております。公式LINEアカウントから承っております。LINEにご登録後、専用の予約フォームより必要情報を入力してご予約ください。</p>
+                                <!-- Added LINE Button -->
+                                <a href="#" class="inline-block mt-4 px-4 py-2 bg-cta-orange text-white rounded-lg font-semibold text-sm hover:bg-orange-600 transition-colors duration-300 shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cta-orange hover:text-white !text-white">
+                                    LINE登録して予約する
+                                </a>
+                            </div>
+                        </div>
+                         <div x-data="{ open: false }" class="faq-item !py-0 !border-b-0">
+                            <div @click="open = !open" class="faq-question py-5 border-b border-gray-200">
+                                <h4 :class="{ 'text-primary': open }">Q: 予約はどのようにすれば良いですか？</h4>
+                                <i data-lucide="chevron-down" class="w-6 h-6 transition-transform duration-300 flex-shrink-0" :class="{ 'rotate-180 text-primary': open }"></i>
+                            </div>
+                             <div x-show="open" x-collapse class="faq-answer pb-5 border-b border-gray-200">
+                                <p>A: ご予約は、公式LINEアカウントから承っております。LINEにご登録後、専用の予約フォームより必要情報を入力してご予約ください。</p>
+                                <!-- Added LINE Button -->
+                                <a href="#" class="inline-block mt-4 px-4 py-2 bg-cta-orange text-white rounded-lg font-semibold text-sm hover:bg-orange-600 transition-colors duration-300 shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cta-orange hover:text-white !text-white">
+                                    LINE登録して予約する
+                                </a>
+                            </div>
+                        </div>
+                         <div x-data="{ open: false }" class="faq-item !py-0 !border-b-0">
+                            <div @click="open = !open" class="faq-question py-5 border-b border-gray-200">
+                                <h4 :class="{ 'text-primary': open }">Q: トレーナーの指名はできますか？</h4>
+                                <i data-lucide="chevron-down" class="w-6 h-6 transition-transform duration-300 flex-shrink-0" :class="{ 'rotate-180 text-primary': open }"></i>
+                            </div>
+                             <div x-show="open" x-collapse class="faq-answer pb-5 border-b border-gray-200">
+                                <p>A: 現在トレーナーの指名はお受けしておりませんが、みなさんにとって適切なトレーナーを担当につけますし、こちら都合でのトレーナーの変更などはいたしません。<br>ただし、トレーナーの急な体調不良なども考えられるため、その際はご迷惑がかからないように変更させていただく場合があります。</p>
+                            </div>
+                        </div>
+                         <div x-data="{ open: false }" class="faq-item !py-0 !border-b-0">
+                            <div @click="open = !open" class="faq-question py-5 border-b border-gray-200">
+                                <h4 :class="{ 'text-primary': open }">Q: 予約のキャンセルや変更はできますか？</h4>
+                                <i data-lucide="chevron-down" class="w-6 h-6 transition-transform duration-300 flex-shrink-0" :class="{ 'rotate-180 text-primary': open }"></i>
+                            </div>
+                             <div x-show="open" x-collapse class="faq-answer pb-5 border-b border-gray-200">
+                                <p>A: ご予約いただいた日時の24時間前までであれば無料でキャンセル、変更が可能です。それ以降の直前のキャンセルはご遠慮いただいておりますが、体調不良など予期せるトラブルの場合はご相談ください。</p>
+                            </div>
+                        </div>
+                         <div x-data="{ open: false }" class="faq-item !py-0 !border-b-0">
+                            <div @click="open = !open" class="faq-question py-5 border-b border-gray-200">
+                                <h4 :class="{ 'text-primary': open }">Q: クレジットカードは使えますか？</h4>
+                                <i data-lucide="chevron-down" class="w-6 h-6 transition-transform duration-300 flex-shrink-0" :class="{ 'rotate-180 text-primary': open }"></i>
+                            </div>
+                             <div x-show="open" x-collapse class="faq-answer pb-5 border-b border-gray-200">
+                                <p>A: 使えます。現金以外の決済方法としてクレジットカード（VISA、マスター、Amex）交通系IC、クイックペイ、ID、楽天ペイが使えます</p>
+                            </div>
+                        </div>
+                        <div x-data="{ open: false }" class="faq-item !py-0 !border-b-0">
+                            <div @click="open = !open" class="faq-question py-5 border-b border-gray-200">
+                                <h4 :class="{ 'text-primary': open }">Q: 入会金はかかりますか？</h4>
+                                <i data-lucide="chevron-down" class="w-6 h-6 transition-transform duration-300 flex-shrink-0" :class="{ 'rotate-180 text-primary': open }"></i>
+                            </div>
+                             <div x-show="open" x-collapse class="faq-answer pb-5 border-b border-gray-200">
+                                <p>A: 入会金はいただいておりません。</p>
+                            </div>
+                        </div>
+                        <div x-data="{ open: false }" class="faq-item !py-0 !border-b-0">
+                            <div @click="open = !open" class="faq-question py-5 border-b border-gray-200">
+                                <h4 :class="{ 'text-primary': open }">Q: お得な継続コースはありますか？</h4>
+                                <i data-lucide="chevron-down" class="w-6 h-6 transition-transform duration-300 flex-shrink-0" :class="{ 'rotate-180 text-primary': open }"></i>
+                            </div>
+                             <div x-show="open" x-collapse class="faq-answer pb-5 border-b border-gray-200">
+                                <p>A: 基本セッション（45分）月2回〜に加え、個別サポートやイベント、セミナー参加優待などの特典があるBACK AGING CLUB会員制度をご用意しております。</p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
             </div>
         </div>
     </section>
 
      <!-- Section 10: Closing Message -->
      <section id="closing" class="py-16 md:py-20 lg:py-24 bg-secondary">
-         <div class="container-section text-center max-w-3xl mx-auto">
+         <div class="container-section text-center max-w-3xl mx-auto animate-on-scroll animate-on-scroll-init">
              <h2 class="mb-6">膝の痛みがない日々を取り戻しませんか？</h2>
              <p class="text-lg mb-8">
                  もし、もう一生この膝の痛みと付き合っていくしかないと諦めているなら…<br>
@@ -671,8 +1285,8 @@
                      <h5 class="text-lg font-semibold text-white mb-4">メニュー</h5>
                      <ul class="space-y-2 text-sm">
                          <li><a href="https://backaging.com/service/" target="_blank" rel="noopener noreferrer" class="hover:text-white">サービス</a></li>
-                         <li><a href="https://backaging.com/voice/" target="_blank" rel="noopener noreferrer" class="hover:text-white">お客様の声</a></li>
-                         <li><a href="https://backaging.com/rendousei/" target="_blank" rel="noopener noreferrer" class="hover:text-white">連動性療法について</a></li>
+                         <li><a href="https://backaging.com/voice/" target="_blank" rel="noopener noreferrer" class="hover:text-white">お客さまの声</a></li>
+                         <li><a href="https://backaging.com/methods/" target="_blank" rel="noopener noreferrer" class="hover:text-white">連動性療法について</a></li>
                          <li><a href="https://backaging.com/faq/" target="_blank" rel="noopener noreferrer" class="hover:text-white">よくある質問</a></li>
                          <li><a href="https://backaging.com/privacy/" target="_blank" rel="noopener noreferrer" class="hover:text-white">プライバシーポリシー</a></li>
                      </ul>
@@ -714,6 +1328,56 @@
         document.addEventListener('alpine:init', () => {
             console.log('Alpine.js initialized.');
         });
+
+        // Intersection Observer for Case Study Videos and Scroll Animations
+        const videoDesktop2 = document.getElementById('case-study-video-2-desktop');
+        const videoMobile2 = document.getElementById('case-study-video-2-mobile');
+
+        const animatedElements = document.querySelectorAll('.animate-on-scroll');
+
+        const observerOptions = {
+            root: null, // ビューポートをルートとする
+            rootMargin: '0px',
+            threshold: 0.1 // 要素が10%表示されたらトリガー（アニメーション用）
+        };
+
+        const videoObserverCallback = (entries, observer) => {
+            entries.forEach(entry => {
+                const videoElement = entry.target;
+                if (entry.isIntersecting) {
+                    videoElement.play().catch(error => {
+                        console.error('Video autoplay failed:', error);
+                    });
+                } else {
+                    videoElement.pause();
+                }
+            });
+        };
+
+        const animationObserverCallback = (entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.remove('animate-on-scroll-init');
+                    entry.target.classList.add('animate-on-scroll-active');
+                    observer.unobserve(entry.target); // 一度アニメーションしたら監視を解除
+                }
+            });
+        };
+
+        const videoObserver = new IntersectionObserver(videoObserverCallback, { ...observerOptions, threshold: 0.5 }); // 動画は50%表示で再生
+        const animationObserver = new IntersectionObserver(animationObserverCallback, observerOptions);
+
+        if (videoDesktop2) {
+            videoObserver.observe(videoDesktop2);
+        }
+        if (videoMobile2) {
+            videoObserver.observe(videoMobile2);
+        }
+
+        animatedElements.forEach(el => {
+            animationObserver.observe(el);
+        });
+
     </script>
 </body>
 </html>
