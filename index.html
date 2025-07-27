@@ -1,6 +1,13 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
+    <!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-T78DBH9');</script>
+    <!-- End Google Tag Manager -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>その膝痛、手術せずに根本から改善しませんか？ | BACK AGING</title>
@@ -17,6 +24,7 @@
                         primary: '#0D9488', // Teal-600
                         secondary: '#F3F4F6', // Gray-100
                         'cta-orange': '#F97316', // Orange-500
+                        'line-green': '#00B900', // LINE Green
                         'text-dark': '#1F2937', // Gray-800
                         'text-default': '#374151', // Gray-700
                         'accent-green': '#10B981', // Emerald-500 for checkmarks
@@ -73,7 +81,7 @@
         }
         @layer components {
             .btn-cta {
-                @apply inline-flex items-center justify-center gap-2 px-8 py-3 bg-cta-orange text-white rounded-lg font-semibold text-lg hover:bg-orange-600 transition-colors duration-300 shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cta-orange disabled:opacity-50;
+                @apply inline-flex items-center justify-center gap-2 px-8 py-3 bg-line-green text-white rounded-lg font-semibold text-lg hover:bg-green-600 transition-colors duration-300 shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-line-green disabled:opacity-50;
             }
             .tel-link {
                 @apply text-primary font-semibold hover:underline inline-flex items-center gap-1;
@@ -158,9 +166,9 @@
              .faq-answer a.bg-cta-orange {
                  @apply text-white hover:text-white;
              }
-            .marker-yellow { /* Renamed from marker-orange */
-                background: linear-gradient(to top, #FDE047 30%, transparent 30%); /* Yellow-300 for marker */
-                @apply px-1 -mx-1 font-semibold; /* Adjust spacing slightly and add font-semibold for bold */
+            .marker-yellow {
+                background: linear-gradient(to top, #FDE047 30%, transparent 30%);
+                @apply px-1 -mx-1 font-semibold;
             }
         }
         @layer utilities {
@@ -169,7 +177,40 @@
                 @apply opacity-0 translate-y-8;
             }
             .animate-on-scroll-active {
-                @apply opacity-100 translate-y-0 transition-all duration-1000 ease-out; /* duration-700 から duration-1000 に変更 */
+                @apply opacity-100 translate-y-0 transition-all duration-1000 ease-out;
+            }
+        }
+        
+        /* Ensure mobile elements are completely hidden on desktop */
+        @media (min-width: 768px) {
+            .mobile-only {
+                display: none !important;
+                visibility: hidden !important;
+                opacity: 0 !important;
+                position: absolute !important;
+                left: -9999px !important;
+                width: 0 !important;
+                height: 0 !important;
+                overflow: hidden !important;
+            }
+            .md\:hidden {
+                display: none !important;
+                visibility: hidden !important;
+                opacity: 0 !important;
+            }
+        }
+        
+        /* Ensure mobile elements are visible on mobile */
+        @media (max-width: 767px) {
+            .mobile-only {
+                display: block !important;
+                visibility: visible !important;
+                opacity: 1 !important;
+                position: static !important;
+                left: auto !important;
+                width: auto !important;
+                height: auto !important;
+                overflow: visible !important;
             }
         }
         .popup-content-wada {
@@ -262,10 +303,88 @@
             background-color: rgba(255, 255, 255, 0.85);
             z-index: -1;
         }
+        /* Hide on desktop */
+        @media (min-width: 1024px) {
+            .fixed-footer-cta {
+                display: none !important;
+            }
+        }
+        
+        /* Fixed Footer CTA Styles */
+        .fixed-footer-cta {
+            position: fixed !important;
+            bottom: 0 !important;
+            left: 0 !important;
+            right: 0 !important;
+            background: white !important;
+            border-top: 1px solid #e5e7eb !important;
+            box-shadow: 0 -4px 6px -1px rgba(0, 0, 0, 0.1) !important;
+            z-index: 9999 !important;
+            padding: 12px 16px !important;
+            transform: translateY(100%) !important;
+            transition: transform 0.3s ease-in-out !important;
+            display: block !important;
+        }
+        
+        .fixed-footer-cta.show {
+            transform: translateY(0) !important;
+            animation: slideUp 0.3s ease-out forwards !important;
+        }
+        
+        @keyframes slideUp {
+            from {
+                transform: translateY(100%) !important;
+            }
+            to {
+                transform: translateY(0) !important;
+            }
+        }
+        
+        /* Section Order Control: Case Studies after Hero */
+        body {
+            display: flex;
+            flex-direction: column;
+        }
+        #case-studies {
+            order: 2;
+        }
+        #future {
+            order: 3;
+        }
+        #introduction {
+            order: 4;
+        }
+        #knee-pain {
+            order: 5;
+        }
+        #approach {
+            order: 6;
+        }
+        #testimonials {
+            order: 7;
+        }
+        #flow {
+            order: 8;
+        }
+        #offer {
+            order: 9;
+        }
+        #faq {
+            order: 10;
+        }
+        #closing {
+            order: 11;
+        }
+        footer {
+            order: 12;
+        }
     </style>
 </head>
 <body class="bg-white" x-data="{ openModal: null }">
-
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-T78DBH9"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
     <!-- Sticky Header -->
     <header x-data="{ open: false }" class="sticky top-0 z-50 bg-white shadow-md">
         <div class="container-section flex justify-between items-center py-3">
@@ -280,12 +399,12 @@
                 <a href="#knee-pain" class="text-sm font-medium text-gray-700 hover:text-primary">膝痛の原因</a>
                 <a href="#approach" class="text-sm font-medium text-gray-700 hover:text-primary">連動性療法とは</a>
                 <a href="#case-studies" class="text-sm font-medium text-gray-700 hover:text-primary">お客さまの声</a>
-                <a href="#flow" class="text-sm font-medium text-gray-700 hover:text-primary">施術の流れ</a>
+                <a href="#flow" class="text-sm font-medium text-gray-700 hover:text-primary">料金・流れ</a>
                 <a href="#offer" class="text-sm font-medium text-gray-700 hover:text-primary">ご予約</a>
                 <a href="#faq" class="text-sm font-medium text-gray-700 hover:text-primary">FAQ</a>
                 <!-- Added CTA Button -->
-                <a href="https://sv1bang6.autosns.app/addfriend/s/S06ikUrfpv/@252giubq" class="ml-4 inline-flex items-center justify-center px-4 py-2 bg-cta-orange text-white rounded-md font-semibold text-sm hover:bg-orange-600 transition-colors duration-300 shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cta-orange">
-                    初回治療を予約
+                <a href="https://sv1bang6.autosns.app/addfriend/s/S06ikUrfpv/@252giubq" class="ml-4 inline-flex items-center justify-center px-4 py-2 bg-line-green text-white rounded-md font-semibold text-sm hover:bg-green-600 transition-colors duration-300 shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-line-green">
+                    LINEで無料問診
                 </a>
             </nav>
 
@@ -304,26 +423,65 @@
             <a href="#knee-pain" @click="open = false" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-primary">膝痛の原因</a>
             <a href="#approach" @click="open = false" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-primary">連動性療法とは</a>
             <a href="#case-studies" @click="open = false" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-primary">お客さまの声</a>
-            <a href="#flow" @click="open = false" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-primary">施術の流れ</a>
+            <a href="#flow" @click="open = false" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-primary">料金・流れ</a>
             <a href="#offer" @click="open = false" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-primary">ご予約</a>
             <a href="#faq" @click="open = false" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-primary">FAQ</a>
             <!-- Added CTA Button in Mobile Menu -->
             <div class="px-4 pt-3 pb-2">
-                <a href="https://sv1bang6.autosns.app/addfriend/s/S06ikUrfpv/@252giubq" @click="open = false" class="block w-full text-center px-4 py-2 bg-cta-orange text-white rounded-md font-semibold text-sm hover:bg-orange-600 transition-colors duration-300 shadow-sm">
-                    初回治療を予約する
+                <a href="https://sv1bang6.autosns.app/addfriend/s/S06ikUrfpv/@252giubq" @click="open = false" class="block w-full text-center px-4 py-2 bg-line-green text-white rounded-md font-semibold text-sm hover:bg-green-600 transition-colors duration-300 shadow-sm">
+                    LINEで無料問診
                 </a>
             </div>
         </nav>
     </header>
 
     <!-- Section 1: First View (Hero) -->
-    <section id="hero" class="bg-gradient-to-b from-teal-50 via-white to-white py-2 md:py-16 lg:py-10 flex items-center">
-        <div class="container-section">
+    <section id="hero" class="md:bg-gradient-to-b md:from-teal-50 md:via-white md:to-white py-0 md:py-16 lg:py-10 md:flex md:items-center">
+        <!-- Mobile Area Message Bar (①) -->
+        <div class="md:hidden mobile-only w-full bg-primary py-1 px-4 block">
+            <span id="area-message" class="text-white text-sm font-semibold text-center block"></span>
+        </div>
+        
+        <!-- Mobile FV: Background image with proper sizing (②) -->
+        <div class="md:hidden mobile-only w-full block">
+            <!-- Background Image Container -->
+            <div class="mobile-fv-bg w-full" style="height: calc(100vw * 1400 / 1024);">
+                <img src="images/FV_sp-02.jpg" alt="膝痛改善 BACK AGING" class="w-full h-full object-cover block" style="object-position: center center;">
+            </div>
+        </div>
+        
+        <!-- CTA Button positioned below the image (③) -->
+        <div class="md:hidden mobile-only w-full block" style="background-color: white; padding: 16px 16px 32px 16px;">
+            <div class="text-center">
+                <a href="https://sv1bang6.autosns.app/addfriend/s/S06ikUrfpv/@252giubq" style="background-color: #00B900; color: white; border-radius: 8px; text-decoration: none; display: inline-flex; padding: 12px 24px; font-size: 18px; font-weight: bold; align-items: center; justify-content: center; gap: 8px;">
+                    <i data-lucide="message-circle" style="width: 20px; height: 20px;"></i>
+                    <span>LINEで無料問診</span>
+                </a>
+                <p style="color: #374151; margin-top: 12px; font-size: 14px;">
+                    お気軽にお問い合わせください
+                </p>
+                <p style="color: #6B7280; margin-top: 8px; font-size: 12px; line-height: 1.5;">
+                    （受付時間：平日9:30-21:00 / 土日祝8:00-19:30）
+                </p>
+                <p style="color: #374151; margin-top: 8px; font-size: 13px; line-height: 1.4;">
+                    <a href="https://g.co/kgs/WJbXdbC" style="color: #0D9488; text-decoration: none; font-weight: 500;" target="_blank">
+                        連動性療法のバックエイジング鎌倉由比ヶ浜店<br>
+                        江ノ島電鉄「由比ヶ浜駅」徒歩3分
+                        <i data-lucide="external-link" style="width: 12px; height: 12px; display: inline-block; margin-left: 4px;"></i>
+                    </a>
+                </p>
+            </div>
+        </div>
+        
+        <!-- Desktop Layout: Keep existing grid layout -->
+        <div class="hidden md:block container-section w-full">
             <!-- Grid for complex Mobile and Desktop layout -->
-            <div class="grid grid-cols-2 md:grid-cols-2 gap-x-4 md:gap-x-12 lg:gap-x-16 gap-y-4 md:gap-y-6 items-start">
+            <div class="grid grid-cols-2 md:grid-cols-2 gap-x-4 md:gap-x-12 lg:gap-x-16 gap-y-2 md:gap-y-6 items-start">
 
                 <!-- Mobile: Left Col (H1 + Disclaimer) / Desktop: Left Col (H1) -->
                 <div class="col-span-1 flex flex-col order-1 md:col-span-1 md:row-start-1 md:order-1 animate-on-scroll animate-on-scroll-init">
+                    <!-- Area Message (will be populated by JavaScript) -->
+                    <span id="area-message-desktop" class="inline-block bg-primary text-white text-xs md:text-2xl font-semibold px-3 md:px-4 py-2 rounded-lg mb-3 shadow-sm" style="width: fit-content;"></span>
                     <h1 class="font-bold text-balance text-left text-2xl sm:text-3xl md:text-4xl lg:text-5xl !leading-snug md:!leading-snug lg:!leading-snug mb-2">
                         膝が痛い。<br>
                         階段がつらい。<br>
@@ -332,10 +490,6 @@
                         <span class="hidden md:inline"> </span>
                         <span class="text-primary">根本から<br class="md:hidden">改善できます。</span>
                     </h1>
-                    <!-- Disclaimer (Visible only on mobile in this column) -->
-                    <p class="md:hidden text-[6px] text-gray-500 mt-1 text-left">
-                        ※本画像は、イメージを伝えたくてAIで生成した画像です。施術の結果を保証するものではありません。気になる効果に関しては、実際に施術体験された方の変化やコメントを、ご本人が投稿されたクチコミからご確認ください。
-                    </p>
                 </div>
 
                 <!-- Mobile: Right Col (Image) / Desktop: Right Col (Image + Disclaimer) -->
@@ -346,28 +500,24 @@
                             <!-- Source for mobile (max-width: 767px) -->
                             <source media="(max-width: 767px)" srcset="images/fv-sp.png">
                             <!-- Default image for desktop and fallback -->
-                            <img src="images/fv-02.png" alt="膝痛改善 前後の比較写真" class="w-full h-full object-cover rounded-xl shadow-lg overflow-hidden" loading="lazy">
+                            <img src="images/fv-03.png" alt="膝痛改善 前後の比較写真" class="w-full h-full object-cover rounded-xl shadow-lg overflow-hidden" loading="lazy">
                          </picture>
                     </div>
-                     <!-- Disclaimer (Visible below image on Desktop) -->
-                    <p class="hidden md:block text-xs text-gray-500 mt-2 text-left">
-                        ※本画像は、イメージを伝えたくてAIで生成した画像です。施術の結果を保証するものではありません。気になる効果に関しては、実際に施術体験された方の変化やコメントを、ご本人が投稿されたクチコミからご確認ください。
-                    </p>
                 </div>
 
                  <!-- Mobile: Below Grid (Sub copy) / Desktop: Left Col (Sub copy) -->
-                 <div class="col-span-2 md:col-span-1 order-3 md:row-start-2 md:order-3 animate-on-scroll animate-on-scroll-init">
+                 <div class="col-span-2 md:col-span-1 order-4 md:row-start-2 md:order-3 animate-on-scroll animate-on-scroll-init">
                     <p class="text-sm sm:text-base md:text-lg text-text-default text-center md:text-left max-w-xl mx-auto md:mx-0 mt-4 md:mt-0">
-                        マッサージや薬では、なかなか良くならなかった膝の痛みが、BACK AGINGの『連動性療法』で変えられるかもしれません。 もし、真剣に根本解決を考えていて、これからの人生でも本当にやりたいことを諦めずに楽しめる毎日を取り戻したいと思うなら、ぜひご一読の上、ご判断ください。
+                        マッサージや薬では、なかなか良くならなかった膝の痛みが、<span class="marker-yellow">BACK AGING（バックエイジング）の『連動性療法』</span>で変えられるかもしれません。 もし、真剣に根本解決を考えていて、これからの人生でも本当にやりたいことを諦めずに楽しめる毎日を取り戻したいと思うなら、ぜひご一読の上、ご判断ください。
                     </p>
                  </div>
 
                 <!-- Mobile: Below Grid (CTA + Contact) / Desktop: Left Col (CTA + Contact) -->
-                <div class="col-span-2 md:col-span-1 order-4 md:row-start-3 md:order-4 animate-on-scroll animate-on-scroll-init">
+                <div class="col-span-2 md:col-span-1 order-5 md:row-start-3 md:order-4 animate-on-scroll animate-on-scroll-init">
                      <div class="flex flex-col sm:flex-row justify-center md:justify-start items-center gap-3 md:gap-6 mt-4 md:mt-6">
                         <a href="https://sv1bang6.autosns.app/addfriend/s/S06ikUrfpv/@252giubq" class="btn-cta w-full sm:w-auto text-sm md:text-lg px-4 sm:px-6 md:px-8 py-2 md:py-3">
-                            <i data-lucide="calendar-plus" class="w-4 h-4 md:w-5 md:h-5"></i>
-                            <span>初回治療を予約する</span>
+                            <i data-lucide="message-circle" class="w-4 h-4 md:w-5 md:h-5"></i>
+                            <span>LINEで無料問診</span>
                         </a>
                         <a href="tel:070-9298-1284" class="tel-link text-primary text-sm md:text-lg mt-2 sm:mt-0">
                             <i data-lucide="phone" class="w-4 h-4 md:w-5 md:h-5"></i>
@@ -378,6 +528,15 @@
                         お気軽にお問い合わせください
                         <br class="block sm:hidden md:hidden">
                         （受付時間：平日9:30-21:00 / 土日祝8:00-19:30）
+                    </p>
+                    <p class="text-xs md:text-sm mt-2 text-center md:text-left">
+                        <a href="https://g.co/kgs/WJbXdbC" class="text-primary hover:underline inline-flex flex-col md:inline items-center gap-1">
+                            <span>連動性療法のバックエイジング鎌倉由比ヶ浜店</span>
+                            <span class="flex items-center gap-1">
+                                江ノ島電鉄「由比ヶ浜駅」徒歩3分
+                                <i data-lucide="external-link" class="w-3 h-3 md:w-4 md:h-4"></i>
+                            </span>
+                        </a>
                     </p>
                 </div>
 
@@ -399,7 +558,7 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12 items-center">
                 <!-- Image Replaced & Resized -->
                 <div class="relative h-72 md:h-96 aspect-square rounded-xl shadow-md overflow-hidden bg-gray-100 mx-auto animate-on-scroll animate-on-scroll-init">
-                    <img src="images/future.png" alt="膝の痛みがなくなり、笑顔で趣味を楽しむ様子" class="w-full h-full object-cover" loading="lazy">
+                    <img src="images/future-2.png" alt="膝の痛みがなくなり、笑顔で趣味を楽しむ様子" class="w-full h-full object-cover" loading="lazy">
                 </div>
                 <!-- Benefit List -->
                 <div class="animate-on-scroll animate-on-scroll-init">
@@ -455,7 +614,7 @@
                     <p class="qualification">連動性トレーナー・鍼灸師</p>
                     <div class="staff-intro-short">
                         <p class="text-sm text-gray-600 mb-2">
-                            腰痛椎間板ヘルニア、変形性股関節症、五十肩など「いろいろな治療院に通っても改善しなかった」と言う重度の患者様の根本改善をサポート
+                            腰椎椎間板ヘルニア、変形性股関節症、五十肩など「いろいろな治療院に通っても改善しなかった」と言う重度の患者様の根本改善をサポート
                         </p>
                         <button @click="openModal = 'hamaki'" class="text-sm text-primary hover:underline focus:outline-none">詳しく見る</button>
                     </div>
@@ -557,7 +716,7 @@
                 </button>
             </div>
             <div class="text-sm text-gray-700 space-y-3 max-h-[60vh] overflow-y-auto pr-2 relative z-10 p-4 rounded">
-                <p>高校から陸上競技の中距離種目に取り組むも怪我に悩み、記録が伸び悩む。その後同じように怪我に苦しむ人をサポートしたいという気持ちから森ノ宮医療大学鍼灸学科に入学。在学中に連動トレーニングと出会い、高校時代より遥かに少ない練習量にも関わらず、800m、1500m、5000mで大幅に自己ベストを更新し、連動トレーニングの効果に衝撃を受ける。自分自身が身体の痛みから解放されて思いっきり走れた感動を届けたいとの思いから、卒業後、新卒でBACK AGING （バックエイジング）に入社。新卒一年目にも関わらず、腰痛椎間板ヘルニア、変形性股関節症、五十肩など「いろいろな治療院に通っても改善しなかった」と言う重度の患者様の根本改善をサポート。「浜木トレーナーにもっと昔に出会いたかった」と言う声を多くいただいている。そしてその実績が認められ、入社2年目にして由比ヶ浜店の店舗責任者に抜擢され、「いつまでも元気で挑戦し続けられる人を増やす挑戦」をスローガンに、日々痛みを抱える患者様と向きあい現在に至る。<br>陸上自己ベストは、800m 1分59秒、 1500m 4分3秒、フルマラソン2時間41分。</p>
+                <p>高校から陸上競技の中距離種目に取り組むも怪我に悩み、記録が伸び悩む。その後同じように怪我に苦しむ人をサポートしたいという気持ちから森ノ宮医療大学鍼灸学科に入学。在学中に連動トレーニングと出会い、高校時代より遥かに少ない練習量にも関わらず、800m、1500m、5000mで大幅に自己ベストを更新し、連動トレーニングの効果に衝撃を受ける。自分自身が身体の痛みから解放されて思いっきり走れた感動を届けたいとの思いから、卒業後、新卒でBACK AGING （バックエイジング）に入社。新卒一年目にも関わらず、腰椎椎間板ヘルニア、変形性股関節症、五十肩など「いろいろな治療院に通っても改善しなかった」と言う重度の患者様の根本改善をサポート。「浜木トレーナーにもっと昔に出会いたかった」と言う声を多くいただいている。そしてその実績が認められ、入社2年目にして由比ヶ浜店の店舗責任者に抜擢され、「いつまでも元気で挑戦し続けられる人を増やす挑戦」をスローガンに、日々痛みを抱える患者様と向きあい現在に至る。<br>陸上自己ベストは、800m 1分59秒、 1500m 4分3秒、フルマラソン2時間41分。</p>
             </div>
             <div class="mt-6 text-right relative z-10">
                 <button @click="openModal = null" class="px-4 py-2 bg-gray-200 text-gray-800 rounded-lg hover:bg-gray-300 focus:outline-none">閉じる</button>
@@ -714,19 +873,112 @@
     </section>
 
     <!-- Section 6: Case Studies (New Section) -->
-    <section id="case-studies" class="py-16 md:py-20 lg:py-24 bg-white"> <!-- 背景色は適宜変更 -->
+    <section id="case-studies" class="py-16 md:py-20 lg:py-24 bg-white">
         <div class="container-section">
-            <h2 class="text-center mb-12 md:mb-16 animate-on-scroll animate-on-scroll-init">膝の痛みを改善されたお客さまの事例</h2>
+            <div class="text-center mb-12 md:mb-16 animate-on-scroll animate-on-scroll-init">
+                <div class="max-w-4xl mx-auto">
+                    <div class="relative bg-gradient-to-r from-gray-50 to-gray-100 rounded-2xl p-6 md:p-8 mb-6">
+                        <div class="absolute top-3 left-4 text-4xl text-primary opacity-20 font-serif">"</div>
+                        <p class="text-base md:text-lg text-gray-700 font-medium italic pl-6 space-y-1">
+                            <span class="block">マッサージや注射では良くならなかった…</span>
+                            <span class="block">もう手術しかないのかな…</span>
+                        </p>
+                        <div class="absolute bottom-3 right-4 text-4xl text-primary opacity-20 font-serif rotate-180">"</div>
+                    </div>
+                    <h2 class="text-xl md:text-2xl lg:text-3xl font-bold text-text-dark mb-8">
+                        そんな方々が、<span class="text-cta-orange">連動性療法</span>で<br class="sm:hidden">劇的に改善されています。
+                    </h2>
+                    
+                    <!-- 下矢印エフェクト -->
+                    <div class="flex justify-center mb-8 animate-on-scroll animate-on-scroll-init">
+                        <div class="flex flex-col items-center space-y-1">
+                            <i data-lucide="chevron-down" class="w-5 h-5 text-cta-orange animate-bounce" style="animation-delay: 0s;"></i>
+                            <i data-lucide="chevron-down" class="w-6 h-6 text-cta-orange animate-bounce" style="animation-delay: 0.2s;"></i>
+                            <i data-lucide="chevron-down" class="w-7 h-7 text-cta-orange animate-bounce" style="animation-delay: 0.4s;"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
             <div class="space-y-16 md:space-y-20"> <!-- 各事例間のスペース -->
 
-                <!-- Case Study 1 -->
+        
+
+                <!-- Case Study 1: 70代女性 -->
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12 items-start animate-on-scroll animate-on-scroll-init">
                     <!-- Text Column (Desktop: order-1) -->
                     <div class="flex flex-col md:order-1">
                         <!-- Title (Mobile: order-1) -->
-                        <h3 class="text-2xl font-semibold text-text-dark mb-4 order-1">事例1：変形性膝関節症でお悩みの50代女性</h3>
-                        <h4 class="text-xl text-primary font-semibold my-2 order-1 animate-on-scroll animate-on-scroll-init">膝の痛みが改善！フルマラソンに挑戦してみたい！</h4>
+                        <h3 class="text-2xl font-semibold text-text-dark mb-4 order-1">事例1：変形性膝関節症でお悩みの70代女性</h3>
+                        <h4 class="text-xl text-cta-orange font-semibold my-2 order-1 animate-on-scroll animate-on-scroll-init">大好きな山登りが出来ない状態から、2ヶ月で劇的に改善！</h4>
+                        <!-- Descriptions (Mobile: order-3) -->
+                        <div class="order-3">
+                            <p class="text-text-default mb-4">
+                                <strong class="text-primary">【来店前の状況】</strong><br>
+                                両膝に変形性膝関節症があり、毎日強い痛みを感じていた。特に右膝の状態が悪く、階段の昇降や坂道の下りで膝に負担がかかり、膝を曲げることが難しい状態。バス通勤時の15分の歩行にさえ不安があるなど、日常生活での行動制限が大きく、50代で始めて以来、ライフワークとなっていた登山も断念していた。BAに来店するまでにも、マッサージ、整形外科、整体など、様々な治療法を試してきたが症状の改善は殆どなかった。偶然、職場に連動性トレーナーが別の仕事で訪問したことをキッカケに来院。
+                            </p>
+                            <p class="text-text-default">
+                                <strong class="text-primary">【改善内容】</strong><br>
+                                施術スタートから約2ヶ月で、右膝の痛みは徐々に軽減され、<span class="marker-yellow">階段の昇降や職場での動作にも不安がなくなってきた</span>。体幹の安定性が向上し、日常生活の中でも「歩けている」「痛みなく動けている」という実感が増え、職場でも変化を感じるように。3ヶ月を過ぎた頃には膝の可動域も広がり、<span class="marker-yellow">登山の復帰はもちろん、新しく「ホノルルマラソンにも挑戦してみたい」と目標を持てるようになるまで改善が見られた</span>。
+                            </p>
+                        </div>
+                        <!-- Image/Video Placeholder (Mobile: order-2, Hidden on Desktop in this column) -->
+                        <div class="order-2 md:hidden">
+                            <!-- <div class="aspect-video bg-gray-300 rounded-lg shadow-md flex items-center justify-center text-gray-500 mt-4">
+                                 
+                                 <p class="text-sm p-4">画像/動画エリア</p>
+                            </div> -->
+                            <video id="case-study-video-1-mobile" src="videos/case1_ba.mp4" loop muted playsinline class="w-full aspect-video rounded-lg shadow-md mt-4"></video>
+                        </div>
+                    </div>
+                    <!-- Image/Video Placeholder Column (Desktop: order-2, Hidden on Mobile) -->
+                    <div class="hidden md:block md:order-2">
+                        <!-- <div class="aspect-video bg-gray-300 rounded-lg shadow-md flex items-center justify-center text-gray-500">
+                             
+                             <p class="text-sm p-4">画像/動画エリア</p>
+                        </div> -->
+                        <video id="case-study-video-1-desktop" src="videos/case1_ba.mp4" loop muted playsinline class="w-full aspect-video rounded-lg shadow-md"></video>
+                    </div>
+                </div>
+                <!-- /Case Study 1: 70代女性 -->
+
+                <!-- Case Study 2: 60代男性 -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12 items-start animate-on-scroll animate-on-scroll-init">
+                    <!-- Image Column (Desktop: order-1, Hidden on Mobile) -->
+                    <div class="hidden md:block md:order-1">
+                        <video id="case-study-video-3-desktop" src="videos/case2_ba.mp4" loop muted playsinline class="w-full aspect-video rounded-lg shadow-md"></video>
+                    </div>
+                    <!-- Text Column (Desktop: order-2) -->
+                    <div class="flex flex-col md:order-2">
+                        <!-- Title (Mobile: order-1) -->
+                        <h3 class="text-2xl font-semibold text-text-dark mb-4 order-1">事例2：膝痛でお悩みの60代男性</h3>
+                        <h4 class="text-xl text-cta-orange font-semibold my-2 order-1 animate-on-scroll animate-on-scroll-init">歩くのがやっとの状態から走れるまでに回復！</h4>
+                        <!-- Descriptions (Mobile: order-3) -->
+                        <div class="order-3">
+                            <p class="text-text-default mb-4">
+                                <strong class="text-primary">【来店前の状況】</strong><br>
+                                長く慢性的な左膝の痛みにより、時速2km程度の歩行しか難しい状態でのご来院。左膝にはサポーターをつけて生活。
+                            </p>
+                            <p class="text-text-default">
+                                <strong class="text-primary">【改善内容】</strong><br>
+                                施術スタートしてから、すぐに改善の兆しがあり、約6ヶ月経ったころには、周りから「明らかに、歩き方が変わってる！」と言われ始めるように。今では、<span class="marker-yellow">トレッドミル上で走れるようほどにまで改善</span>した。<span class="marker-yellow">早歩き（人を抜かせるぐらい）したり、階段を1段飛ばしで進めるようにもなった。</span>
+                            </p>
+                        </div>
+                        <!-- Image/Video (Mobile: order-2, Hidden on Desktop in this column) -->
+                        <div class="order-2 md:hidden">
+                            <video id="case-study-video-3-mobile" src="videos/case2_ba.mp4" loop muted playsinline class="w-full aspect-video rounded-lg shadow-md mt-4"></video>
+                        </div>
+                    </div>
+                </div>
+                <!-- /Case Study 2: 60代男性 -->
+
+                <!-- Case Study 3 -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12 items-start animate-on-scroll animate-on-scroll-init">
+                    <!-- Text Column (Desktop: order-1) -->
+                    <div class="flex flex-col md:order-1">
+                        <!-- Title (Mobile: order-1) -->
+                        <h3 class="text-2xl font-semibold text-text-dark mb-4 order-1">事例3：変形性膝関節症でお悩みの50代女性</h3>
+                        <h4 class="text-xl text-cta-orange font-semibold my-2 order-1 animate-on-scroll animate-on-scroll-init">膝の痛みが改善！フルマラソンに挑戦してみたい！</h4>
                         <!-- Descriptions (Mobile: order-3) -->
                         <div class="order-3">
                             <p class="text-text-default mb-4">
@@ -753,67 +1005,41 @@
                         </div>
                     </div>
                 </div>
-                <!-- /Case Study 1 -->
+                <!-- /Case Study 3 -->
 
-                <!-- Case Study 2 -->
+                <!-- Case Study 4: 50代男性 -->
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12 items-start animate-on-scroll animate-on-scroll-init">
                     <!-- Image Column (Desktop: order-1, Hidden on Mobile) -->
                     <div class="hidden md:block md:order-1">
-                        <video id="case-study-video-2-desktop" src="videos/case2_ba.mp4" loop muted playsinline class="w-full aspect-video rounded-lg shadow-md"></video>
+                        <video id="case-study-video-4-desktop" src="videos/case4_ba.mp4" loop muted playsinline class="w-full aspect-video rounded-lg shadow-md"></video>
                     </div>
                     <!-- Text Column (Desktop: order-2) -->
                     <div class="flex flex-col md:order-2">
                         <!-- Title (Mobile: order-1) -->
-                        <h3 class="text-2xl font-semibold text-text-dark mb-4 order-1">事例2：膝痛でお悩みの60代男性</h3>
-                        <h4 class="text-xl text-primary font-semibold my-2 order-1 animate-on-scroll animate-on-scroll-init">歩くのがやっとの状態から走れるまでに回復！</h4>
+                        <h3 class="text-2xl font-semibold text-text-dark mb-4 order-1">事例4：半月板損傷でお悩みの50代男性</h3>
+                        <h4 class="text-xl text-cta-orange font-semibold my-2 order-1 animate-on-scroll animate-on-scroll-init">膝の痛みで諦めていた趣味のマラソンにも、約4年ぶりに見事復帰！</h4>
                         <!-- Descriptions (Mobile: order-3) -->
                         <div class="order-3">
                             <p class="text-text-default mb-4">
                                 <strong class="text-primary">【来店前の状況】</strong><br>
-                                長く慢性的な左膝の痛みにより、時速2km程度の歩行しか難しい状態でのご来院。左膝にはサポーターをつけて生活。
+                                2020年、右膝を痛めてからは日常生活でも違和感を感じるように。それ以来、趣味だったランニングも思うように走れず、モヤモヤした日々が続く。さらに2022年10月、左膝の半月板損傷で手術。踵を上げるたびに左膝がズキズキと痛み、右腰やふくらはぎにも不調が広がる。「このままじゃ、マラソン完走はもちろん走れない体になるかもしれない…」
+                                そんな不安を抱えながら、マッサージ・整形外科・整体など、さまざまな方法を試すも、目に見える改善には至らず。
                             </p>
                             <p class="text-text-default">
                                 <strong class="text-primary">【改善内容】</strong><br>
-                                施術スタートしてから、すぐに改善の兆しがあり、約6ヶ月経ったころには、周りから「明らかに、歩き方が変わってる！！」と言われ始めるように。今では、<span class="marker-yellow">トレッドミル上で走れるようほどにまで改善</span>した。<span class="marker-yellow">早歩き（人を抜かせるぐらい）したり、階段を1段飛ばしで進めるようにもなった。</span>
+                                初回から約2ヶ月。連動性トレーニングとセルフエクササイズを実践するうちに、悩まされていた膝や腰の痛み、ふくらはぎの硬さが徐々に軽減。
+                                「体の使い方が変わった」と自分でも実感できるようになり、<span class="marker-yellow">痛みを気にせず走ることが、少しずつ"日常"へと戻ってくる</span>。
+                                そして、<span class="marker-yellow">「もう無理かもしれない」と思っていたフルマラソンへ約4年ぶり復帰</span>。
+                                <span class="marker-yellow">今では自己ベスト更新を目指して、再び走ることを楽しんでいる</span>。
                             </p>
                         </div>
                         <!-- Image/Video (Mobile: order-2, Hidden on Desktop in this column) -->
                         <div class="order-2 md:hidden">
-                            <video id="case-study-video-2-mobile" src="videos/case2_ba.mp4" loop muted playsinline class="w-full aspect-video rounded-lg shadow-md mt-4"></video>
+                            <video id="case-study-video-4-mobile" src="videos/case4_ba.mp4" loop muted playsinline class="w-full aspect-video rounded-lg shadow-md mt-4"></video>
                         </div>
                     </div>
                 </div>
-                <!-- /Case Study 2 -->
-
-                <!-- Case Study 3 (Commented Out)
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12 items-start">
-                    
-                    <div class="flex flex-col md:order-1">
-                        
-                        <h3 class="text-2xl font-semibold text-text-dark mb-4 order-1">事例3：スポーツ復帰を目指す50代女性</h3>
-                        
-                        <div class="order-3">
-                            <p class="text-text-default mb-4">
-                                <strong class="text-primary">【来店前の状況】</strong><br>
-                                ここに仮のテキストが入ります。〇〇さんの来店前の具体的な状況を説明します。
-                            </p>
-                            <p class="text-text-default">
-                                <strong class="text-primary">【改善内容】</strong><br>
-                                ここに仮のテキストが入ります。BACK AGINGでの施術やトレーニングによって、どのように症状が改善したかを具体的に説明します。
-                            </p>
-                        </div>
-                        
-                        <div class="order-2 md:hidden">
-                            <video id="case-study-video-3-mobile" src="videos/case3_ba.mp4" loop muted playsinline class="w-full aspect-video rounded-lg shadow-md mt-4"></video>
-                        </div>
-                    </div>
-                    
-                    <div class="hidden md:block md:order-2">
-                        <video id="case-study-video-3-desktop" src="videos/case3_ba.mp4" loop muted playsinline class="w-full aspect-video rounded-lg shadow-md"></video>
-                    </div>
-                </div>
-                 
-                 -->
+                <!-- /Case Study 4: 50代男性 -->
 
             </div>
         </div>
@@ -867,7 +1093,18 @@
      <!-- Section 7: Session Flow -->
      <section id="flow" class="py-16 md:py-20 lg:py-24">
          <div class="container-section">
-             <h2 class="text-center mb-12 md:mb-16 animate-on-scroll animate-on-scroll-init">初回治療セッションの流れ</h2>
+             <h2 class="text-center mb-12 md:mb-16 animate-on-scroll animate-on-scroll-init">料金・初回治療の流れ</h2>
+             
+             <!-- Pricing Information -->
+             <div class="max-w-xl mx-auto mb-12 md:mb-16 bg-gradient-to-r from-teal-50 to-cyan-50 rounded-lg p-8 border border-teal-200 animate-on-scroll animate-on-scroll-init">
+                 <h3 class="text-center mb-6 text-primary">初回治療（約80分）</h3>
+                 <div class="text-center mb-6">
+                     <span class="text-4xl font-bold text-text-dark">9,900</span>
+                     <span class="text-lg text-gray-600">円（税込）</span>
+                 </div>
+                 <p class="text-sm text-gray-600 text-center">※事務手数料や入会費はございません。</p>
+             </div>
+
              <div class="max-w-2xl mx-auto">
                   <!-- Step items - Icon bg and line color now Teal -->
                  <div class="step-item animate-on-scroll animate-on-scroll-init">
@@ -911,8 +1148,8 @@
                 初回治療体験では、あなたの膝痛の根本原因を明確にし、<br class="hidden sm:inline">連動性療法が効果的かどうかをしっかり確認します。
             </p>
             <a href="https://sv1bang6.autosns.app/addfriend/s/S06ikUrfpv/@252giubq" class="btn-cta mb-6">
-                <i data-lucide="calendar-check" class="w-6 h-6"></i>
-                今すぐ初回治療を予約する
+                <i data-lucide="message-circle" class="w-5 h-5"></i>
+                LINEで無料問診に申し込む
             </a>
             <p class="mb-8">
                   <a href="tel:070-9298-1284" class="tel-link text-white hover:text-teal-200 text-xl font-semibold inline-flex items-center gap-2">
@@ -1001,7 +1238,7 @@
                                 <i data-lucide="chevron-down" class="w-6 h-6 transition-transform duration-300 flex-shrink-0" :class="{ 'rotate-180 text-primary': open }"></i>
                             </div>
                             <div x-show="open" x-collapse class="faq-answer pb-5 border-b border-gray-200">
-                                <p>A: BACK AGINGは、「連動性療法」に基づいたパーソナルトレーニングと治療を提供しています。従来の整体、マッサージやストレッチ等とは異なり、全身の筋肉や関節の連動性を高めることで、慢性的な腰痛や肩こり、スポーツ障害などを根本から改善に導きます。</p>
+                                <p>A: BACK AGINGは、「連動性療法」に基づいたパーソナルトレーニングと治療を提供しています。従来の整体、マッサージやストレッチ等とは異なり、全身の筋肉や関節の連動性を高めることで、慢性的な膝痛や腰痛、スポーツ障害などを根本から改善に導きます。</p>
                             </div>
                         </div>
                         <div x-data="{ open: false }" class="faq-item !py-0 !border-b-0">
@@ -1019,7 +1256,7 @@
                                 <i data-lucide="chevron-down" class="w-6 h-6 transition-transform duration-300 flex-shrink-0" :class="{ 'rotate-180 text-primary': open }"></i>
                             </div>
                             <div x-show="open" x-collapse class="faq-answer pb-5 border-b border-gray-200">
-                                <p>A: 従来の腰痛治療などは、痛みのある部分にマッサージや電気治療などを施す対症療法が一般的でした。しかし、このような方法は一時的な効果にとどまりやすく、根本的な解決には繋がらないことが多いのも実情です。BACK AGINGでは、全身の連動性を評価し、動きのクセや歪みを根本から改善していくため、再発しにくい体づくりを目指せます。</p>
+                                <p>A: 従来治療などは、痛みのある部分にマッサージや電気治療などを施す対症療法が一般的でした。しかし、このような方法は一時的な効果にとどまりやすく、根本的な解決には繋がらないことが多いのも実情です。BACK AGINGでは、全身の連動性を評価し、動きのクセや歪みを根本から改善していくため、再発しにくい体づくりを目指せます。</p>
                             </div>
                         </div>
                         <div x-data="{ open: false }" class="faq-item !py-0 !border-b-0">
@@ -1029,7 +1266,7 @@
                             </div>
                             <div x-show="open" x-collapse class="faq-answer pb-5 border-b border-gray-200">
                                  <ul class="list-disc list-inside space-y-1">
-                                    <li>慢性的な腰痛、肩こり、膝痛等の改善</li>
+                                    <li>慢性的な膝痛、腰痛等の改善</li>
                                     <li>スポーツパフォーマンスの向上</li>
                                     <li>猫背や姿勢の改善</li>
                                     <li>怪我の予防</li>
@@ -1047,7 +1284,7 @@
                             </div>
                             <div x-show="open" x-collapse class="faq-answer pb-5 border-b border-gray-200">
                                  <ul class="list-disc list-inside space-y-1">
-                                    <li>長年、腰痛や肩こりに悩まされている方</li>
+                                    <li>長年、膝痛や腰痛、肩こりに悩まされている方</li>
                                     <li>様々な治療を試したが効果が実感できなかった方</li>
                                     <li>スポーツのパフォーマンスを向上させたい方</li>
                                     <li>怪我をしにくい体作りをしたい方</li>
@@ -1203,8 +1440,8 @@
                              <div x-show="open" x-collapse class="faq-answer pb-5 border-b border-gray-200">
                                 <p>A: 完全予約制となっております。公式LINEアカウントから承っております。LINEにご登録後、専用の予約フォームより必要情報を入力してご予約ください。</p>
                                 <!-- Added LINE Button -->
-                                <a href="https://sv1bang6.autosns.app/addfriend/s/S06ikUrfpv/@252giubq" class="inline-block mt-4 px-4 py-2 bg-cta-orange text-white rounded-lg font-semibold text-sm hover:bg-orange-600 transition-colors duration-300 shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cta-orange hover:text-white !text-white">
-                                    LINE登録して予約する
+                                <a href="https://sv1bang6.autosns.app/addfriend/s/S06ikUrfpv/@252giubq" class="inline-block mt-4 px-4 py-2 bg-line-green text-white rounded-lg font-semibold text-sm hover:bg-green-600 transition-colors duration-300 shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-line-green hover:text-white !text-white">
+                                    LINEで無料問診
                                 </a>
                             </div>
                         </div>
@@ -1216,8 +1453,8 @@
                              <div x-show="open" x-collapse class="faq-answer pb-5 border-b border-gray-200">
                                 <p>A: ご予約は、公式LINEアカウントから承っております。LINEにご登録後、専用の予約フォームより必要情報を入力してご予約ください。</p>
                                 <!-- Added LINE Button -->
-                                <a href="https://sv1bang6.autosns.app/addfriend/s/S06ikUrfpv/@252giubq" class="inline-block mt-4 px-4 py-2 bg-cta-orange text-white rounded-lg font-semibold text-sm hover:bg-orange-600 transition-colors duration-300 shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cta-orange hover:text-white !text-white">
-                                    LINE登録して予約する
+                                <a href="https://sv1bang6.autosns.app/addfriend/s/S06ikUrfpv/@252giubq" class="inline-block mt-4 px-4 py-2 bg-line-green text-white rounded-lg font-semibold text-sm hover:bg-green-600 transition-colors duration-300 shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-line-green hover:text-white !text-white">
+                                    LINEで無料問診
                                 </a>
                             </div>
                         </div>
@@ -1290,11 +1527,27 @@
                  あなたにお会いできることを、スタッフ一同、心より楽しみにしています。
              </p>
              <a href="https://sv1bang6.autosns.app/addfriend/s/S06ikUrfpv/@252giubq" class="btn-cta">
-                 <i data-lucide="check-circle"></i>
-                 初回治療体験に申し込む
+                 <i data-lucide="message-circle" class="w-5 h-5"></i>
+                 LINEで無料問診に申し込む
              </a>
          </div>
      </section>
+
+    <!-- Fixed Footer CTA (モバイルのみ表示) -->
+    <div id="fixed-footer-cta" class="lg:hidden" style="position: fixed !important; bottom: 0 !important; left: 0 !important; right: 0 !important; z-index: 99999 !important; background: white !important; border-top: 1px solid #e5e7eb !important; box-shadow: 0 -4px 6px -1px rgba(0, 0, 0, 0.1) !important; padding: 12px 16px !important; transform: translateY(100%) !important; transition: transform 0.3s ease !important;">
+        <div class="flex items-center justify-between gap-3">
+            <!-- LINE Button -->
+            <a href="https://sv1bang6.autosns.app/addfriend/s/S06ikUrfpv/@252giubq" class="flex-1 bg-line-green text-white rounded-lg py-3 px-4 font-semibold text-center hover:bg-green-600 transition-colors duration-300 flex items-center justify-center gap-2">
+                <i data-lucide="message-circle" class="w-5 h-5"></i>
+                <span>LINE問診</span>
+            </a>
+            <!-- Phone Button -->
+            <a href="tel:070-9298-1284" class="flex-1 bg-primary text-white rounded-lg py-3 px-4 font-semibold text-center hover:bg-teal-700 transition-colors duration-300 flex items-center justify-center gap-2">
+                <i data-lucide="phone" class="w-5 h-5"></i>
+                <span>電話する</span>
+            </a>
+        </div>
+    </div>
 
     <!-- Footer -->
     <footer class="bg-text-dark text-gray-300 py-12">
@@ -1328,7 +1581,7 @@
                      </a>
                      <p class="text-sm">受付: 平日9:30-21:00 / 土日祝8:00-19:30</p>
                       <a href="https://sv1bang6.autosns.app/addfriend/s/S06ikUrfpv/@252giubq" class="inline-block mt-4 px-4 py-2 bg-primary text-white text-sm rounded hover:bg-teal-700 transition-colors">
-                         Webで初回予約する
+                         LINEで無料問診する
                      </a>
                  </div>
              </div>
@@ -1357,9 +1610,58 @@
             console.log('Alpine.js initialized.');
         });
 
+        // Area Message Handler
+        function handleAreaMessage() {
+            // URLパラメータからareaを取得
+            const params = new URLSearchParams(window.location.search);
+            const area = params.get('area');
+            
+            // エリアごとのメッセージ
+            const areaMessages = {
+                kamakura: '鎌倉市にお住まいの方へ',
+                fujisawa: '藤沢市にお住まいの方へ',
+                yokohama: '横浜市にお住まいの方へ',
+                enoshima: '江の島周辺にお住まいの方へ',
+                ofuna: '大船にお住まいの方へ',
+                zushi: '逗子市にお住まいの方へ',
+                hayama: '葉山町にお住まいの方へ'
+                // 必要に応じて他のエリアも追加可能
+            };
+            
+            // デフォルトメッセージ
+            const defaultMessage = '鎌倉市近隣にお住まいの方へ';
+            
+            // メッセージを設定
+            const messageElement = document.getElementById('area-message');
+            const messageElementDesktop = document.getElementById('area-message-desktop');
+            
+            const setMessage = (element) => {
+                if (element) {
+                    if (area && areaMessages[area]) {
+                        element.textContent = areaMessages[area];
+                    } else {
+                        element.innerHTML = defaultMessage;
+                    }
+                }
+            };
+            
+            // 両方のエリアメッセージ要素に設定
+            setMessage(messageElement);
+            setMessage(messageElementDesktop);
+        }
+
+        // ページ読み込み時に実行
+        document.addEventListener('DOMContentLoaded', handleAreaMessage);
+
         // Intersection Observer for Case Study Videos and Scroll Animations
+        const videoDesktop1 = document.getElementById('case-study-video-1-desktop'); // Added for Case Study 1
+        const videoMobile1 = document.getElementById('case-study-video-1-mobile');   // Added for Case Study 1
         const videoDesktop2 = document.getElementById('case-study-video-2-desktop');
         const videoMobile2 = document.getElementById('case-study-video-2-mobile');
+        const videoDesktop3 = document.getElementById('case-study-video-3-desktop');
+        const videoMobile3 = document.getElementById('case-study-video-3-mobile');
+        const videoDesktop4 = document.getElementById('case-study-video-4-desktop'); // Added for Case Study 4
+        const videoMobile4 = document.getElementById('case-study-video-4-mobile');   // Added for Case Study 4
 
         const animatedElements = document.querySelectorAll('.animate-on-scroll');
 
@@ -1395,17 +1697,235 @@
         const videoObserver = new IntersectionObserver(videoObserverCallback, { ...observerOptions, threshold: 0.5 }); // 動画は50%表示で再生
         const animationObserver = new IntersectionObserver(animationObserverCallback, observerOptions);
 
+        if (videoDesktop1) { // Added for Case Study 1
+            videoObserver.observe(videoDesktop1);
+        }
+        if (videoMobile1) { // Added for Case Study 1
+            videoObserver.observe(videoMobile1);
+        }
         if (videoDesktop2) {
             videoObserver.observe(videoDesktop2);
         }
         if (videoMobile2) {
             videoObserver.observe(videoMobile2);
         }
+        if (videoDesktop3) {
+            videoObserver.observe(videoDesktop3);
+        }
+        if (videoMobile3) {
+            videoObserver.observe(videoMobile3);
+        }
+        if (videoDesktop4) { // Added for Case Study 4
+            videoObserver.observe(videoDesktop4);
+        }
+        if (videoMobile4) { // Added for Case Study 4
+            videoObserver.observe(videoMobile4);
+        }
 
         animatedElements.forEach(el => {
             animationObserver.observe(el);
         });
 
+        // Desktop用：スマホ要素を強制非表示
+        function hideMobileElementsOnDesktop() {
+            if (window.innerWidth >= 768) {
+                const mobileElements = document.querySelectorAll('.mobile-only, .md\\:hidden');
+                mobileElements.forEach(element => {
+                    element.style.display = 'none';
+                    element.style.visibility = 'hidden';
+                    element.style.opacity = '0';
+                    element.style.position = 'absolute';
+                    element.style.left = '-9999px';
+                });
+            } else {
+                // モバイルでは要素を正常に表示
+                const mobileElements = document.querySelectorAll('.mobile-only');
+                mobileElements.forEach(element => {
+                    element.style.display = '';
+                    element.style.visibility = '';
+                    element.style.opacity = '';
+                    element.style.position = '';
+                    element.style.left = '';
+                });
+            }
+        }
+
+        // ページ読み込み時とリサイズ時に実行
+        document.addEventListener('DOMContentLoaded', hideMobileElementsOnDesktop);
+        window.addEventListener('resize', hideMobileElementsOnDesktop);
+
+        // Fixed Footer CTA の表示制御（超シンプル版）
+        function handleFixedFooterCTA() {
+            if (window.innerWidth >= 1024) return;
+            
+            const fixedCTA = document.getElementById('fixed-footer-cta');
+            const heroSection = document.getElementById('hero');
+            
+            if (!fixedCTA || !heroSection) return;
+            
+            const heroBottom = heroSection.offsetTop + heroSection.offsetHeight;
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            
+            if (scrollTop > heroBottom) {
+                fixedCTA.style.transform = 'translateY(0)';
+            } else {
+                fixedCTA.style.transform = 'translateY(100%)';
+            }
+        }
+
+        // スクロール時に固定CTAの表示を制御
+        window.addEventListener('scroll', handleFixedFooterCTA);
+        
+        // ページ読み込み時にも実行
+        document.addEventListener('DOMContentLoaded', function() {
+            handleFixedFooterCTA();
+            
+            // モバイルでのテスト表示（2秒後）
+            if (window.innerWidth < 1024) {
+                setTimeout(() => {
+                    const fixedCTA = document.getElementById('fixed-footer-cta');
+                    if (fixedCTA) {
+                        fixedCTA.style.transform = 'translateY(0)';
+                        console.log('Mobile CTA test show - should be visible now');
+                    }
+                }, 2000);
+            }
+        });
     </script>
 </body>
+
+<!-- 完全独立の固定フッターCTA -->
+<div id="mobile-fixed-cta" style="
+    position: fixed !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    width: 100vw !important;
+    z-index: 999999 !important;
+    background: red !important;
+    border-top: 3px solid blue !important;
+    box-shadow: 0 -4px 6px -1px rgba(0, 0, 0, 0.1) !important;
+    padding: 12px 16px !important;
+    transform: translateY(0) !important;
+    display: none !important;
+">
+    <div style="display: flex !important; align-items: center !important; justify-content: space-between !important; gap: 12px !important;">
+        <!-- LINE Button -->
+        <a href="https://sv1bang6.autosns.app/addfriend/s/S06ikUrfpv/@252giubq" 
+           style="
+               flex: 1 !important;
+               background: #00B900 !important;
+               color: white !important;
+               border-radius: 8px !important;
+               padding: 12px 16px !important;
+               font-weight: 600 !important;
+               text-align: center !important;
+               text-decoration: none !important;
+               display: flex !important;
+               align-items: center !important;
+               justify-content: center !important;
+               gap: 8px !important;
+           ">
+            <span>📱 LINE問診 (新)</span>
+        </a>
+        <!-- Phone Button -->
+        <a href="tel:070-9298-1284" 
+           style="
+               flex: 1 !important;
+               background: #0D9488 !important;
+               color: white !important;
+               border-radius: 8px !important;
+               padding: 12px 16px !important;
+               font-weight: 600 !important;
+               text-align: center !important;
+               text-decoration: none !important;
+               display: flex !important;
+               align-items: center !important;
+               justify-content: center !important;
+               gap: 8px !important;
+           ">
+            <span>📞 電話する (新)</span>
+        </a>
+    </div>
+</div>
+
+<script>
+// 完全独立の固定フッター制御
+(function() {
+    console.log('Independent mobile CTA initializing...');
+    
+    function getScreenInfo() {
+        const info = {
+            innerWidth: window.innerWidth,
+            outerWidth: window.outerWidth,
+            screenWidth: screen.width,
+            clientWidth: document.documentElement.clientWidth,
+            devicePixelRatio: window.devicePixelRatio,
+            zoom: Math.round(window.devicePixelRatio * 100) + '%'
+        };
+        console.log('Screen info:', info);
+        return info;
+    }
+    
+    function isMobileDevice() {
+        const info = getScreenInfo();
+        
+        // 複数の方法で判定
+        const methods = {
+            innerWidth: info.innerWidth < 1024,
+            clientWidth: info.clientWidth < 1024,
+            screenWidth: info.screenWidth < 1024,
+            userAgent: /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
+        };
+        
+        console.log('Mobile detection methods:', methods);
+        
+        // いずれかの方法でモバイルと判定されれば true
+        return methods.innerWidth || methods.clientWidth || methods.screenWidth || methods.userAgent;
+    }
+    
+    function showMobileCTA() {
+        if (!isMobileDevice()) {
+            console.log('Desktop detected, hiding CTA');
+            return;
+        }
+        
+        const cta = document.getElementById('mobile-fixed-cta');
+        if (cta) {
+            cta.style.display = 'block';
+            console.log('Mobile CTA shown');
+        }
+    }
+    
+    function hideMobileCTA() {
+        const cta = document.getElementById('mobile-fixed-cta');
+        if (cta) {
+            cta.style.display = 'none';
+            console.log('Mobile CTA hidden');
+        }
+    }
+    
+    // ページ読み込み後に実行
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('DOM loaded, showing mobile CTA in 1 second');
+            setTimeout(showMobileCTA, 1000);
+        });
+    } else {
+        console.log('DOM already loaded, showing mobile CTA in 1 second');
+        setTimeout(showMobileCTA, 1000);
+    }
+    
+    // リサイズ時の対応
+    window.addEventListener('resize', function() {
+        console.log('Window resized');
+        if (!isMobileDevice()) {
+            hideMobileCTA();
+        } else {
+            showMobileCTA();
+        }
+    });
+})();
+</script>
+
 </html>
