@@ -184,7 +184,7 @@
         /* Ensure mobile elements are completely hidden on desktop */
         @media (min-width: 768px) {
             .mobile-only {
-                display: none !important;
+                display: block !important;
                 visibility: hidden !important;
                 opacity: 0 !important;
                 position: absolute !important;
@@ -194,7 +194,7 @@
                 overflow: hidden !important;
             }
             .md\:hidden {
-                display: none !important;
+                display: block !important;
                 visibility: hidden !important;
                 opacity: 0 !important;
             }
@@ -306,7 +306,7 @@
         /* Hide on desktop */
         @media (min-width: 1024px) {
             .fixed-footer-cta {
-                display: none !important;
+                display: block !important;
             }
         }
         
@@ -327,7 +327,7 @@
         }
         
         .fixed-footer-cta.show {
-            transform: translateY(0) !important;
+            transform: translateY(100%) !important; transition: transform 0.3s ease-in-out !important;
             animation: slideUp 0.3s ease-out forwards !important;
         }
         
@@ -336,7 +336,7 @@
                 transform: translateY(100%) !important;
             }
             to {
-                transform: translateY(0) !important;
+                transform: translateY(100%) !important; transition: transform 0.3s ease-in-out !important;
             }
         }
         
@@ -1801,8 +1801,8 @@
     border-top: 1px solid #e5e7eb !important;
     box-shadow: 0 -4px 6px -1px rgba(0, 0, 0, 0.1) !important;
     padding: 12px 16px !important;
-    transform: translateY(0) !important;
-    display: none !important;
+    transform: translateY(100%) !important; transition: transform 0.3s ease-in-out !important;
+    display: block !important;
 ">
     <div style="display: flex !important; align-items: center !important; justify-content: space-between !important; gap: 12px !important;">
         <!-- LINE Button -->
@@ -1862,32 +1862,44 @@
         return innerWidth < 1024 || clientWidth < 1024 || screenWidth < 1024 || userAgent;
     }
     
+    
     function showMobileCTA() {
         if (!isMobileDevice()) {
             return;
         }
         
-        const cta = document.getElementById('fixed-footer-cta');
+        const cta = document.getElementById("fixed-footer-cta");
         if (cta) {
-            cta.style.display = 'block';
-            cta.style.position = 'fixed';
-            cta.style.bottom = '0';
-            cta.style.left = '0';
-            cta.style.right = '0';
-            cta.style.zIndex = '999999';
-            cta.style.visibility = 'visible';
-            cta.style.opacity = '1';
-            cta.style.removeProperty('top');
-            cta.style.height = 'auto';
-            cta.style.minHeight = '0';
-            cta.style.maxHeight = 'none';
+            cta.style.display = "block";
+            cta.style.position = "fixed";
+            cta.style.bottom = "0";
+            cta.style.left = "0";
+            cta.style.right = "0";
+            cta.style.zIndex = "999999";
+            cta.style.visibility = "visible";
+            cta.style.opacity = "1";
+            cta.style.removeProperty("top");
+            cta.style.height = "auto";
+            cta.style.minHeight = "0";
+            cta.style.maxHeight = "none";
+            
+            // スライドアップアニメーション
+            setTimeout(() => {
+                cta.style.transform = "translateY(0)";
+            }, 10);
         }
     }
     
     function hideMobileCTA() {
-        const cta = document.getElementById('fixed-footer-cta');
+        const cta = document.getElementById("fixed-footer-cta");
         if (cta) {
-            cta.style.display = 'none';
+            // スライドダウンアニメーション
+            cta.style.transform = "translateY(100%)";
+            
+            // アニメーション完了後に非表示
+            setTimeout(() => {
+                cta.style.display = "none";
+            }, 300);
         }
     }
     
